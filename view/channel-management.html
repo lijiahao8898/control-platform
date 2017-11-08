@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+
+    <!-- 内容部分 -->
+    <div class="right_col" role="main">
+
+        <!-- 搜索 -->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>搜索框</small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="form-inline fr">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" placeholder="请输入渠道商名称" class="form-control form-control-lg" id="keywords">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-success" id="search">搜索</button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        <!-- 姓名角色-->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>渠道列表</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <!-- 关联-->
+                <div class="form-group ">
+                    <a class="btn btn-sm btn-success" href="channel-add.html">添加</a>
+                </div>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped jambo_table bulk_action table-bordered">
+                        <thead>
+                        <tr class="headings">
+                            <th class="tc">
+                                <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title tc">渠道商ID</th>
+                            <th class="column-title tc">渠道商名称</th>
+                            <th class="column-title tc">联系人</th>
+                            <th class="column-title tc">电话</th>
+                            <th class="column-title tc">账号</th>
+                            <th class="column-title tc">商城名称</th>
+                            <th class="column-title tc">后台域名</th>
+                            <th class="column-title tc">前台域名</th>
+                            <th class="column-title tc">状态</th>
+                            <th class="column-title tc no-link last"><span class="nobr">操作</span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="channelList">
+                            <tr>
+                                <td class="tc" colspan="18">没有任何记录~</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 页码 -->
+                <div class="widget-list clearfix ">
+                    <div class="fl pagination">
+                        <!--<button class="btn btn-sm btn-success" id="batchDelete" >删除</button>-->
+                        <button class="btn btn-sm btn-success" id="batchunFreeze" >激活</button>
+                        <button class="btn btn-sm btn-success" id="batchFreeze" >关闭</button>
+                    </div>
+                    <div class="list-page fr">
+                        <span class="pagination-info"></span>
+                        <div class="ui-pagination pagination"></div>
+                    </div>
+                </div>
+                <!-- /页码 -->
+            </div>
+        </div>
+    </div>
+    <!-- page content -->
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+
+<!-- rev-hash -->
+<script src="../src/fn/channel-management.js"></script>
+<!-- end -->
+
+<script type="text/template" id="j-template">
+    <% _.each(items, function(item,index){ %>
+    <tr class="even pointer list">
+        <td class="a-center tc">
+            <input type="checkbox" class="flat checkbox" name="table_records" data-id="<%= item.id %>">
+        </td>
+        <td class="tc"><%= item.id %></td>
+        <td class="tc"><%= item.name %> </td>
+        <td class="tc"><%= item.linkman %></td>
+        <td class="tc"><%= item.linkphone %></td>
+        <td class="tc"><%= item.store_account %></td>
+        <td class="tc"><%= item.store_ch_name %></td>
+        <td class="tc"><%= item.back_domain_name %></td>
+        <td class="tc"><%= item.fore_domain_name %></td>
+        <td class="tc"><%= ['激活','关闭'][item.channel_status] %></td>
+        <td class="last tc">
+            <a href="channel-add.html?id=<%= item.id %>">编辑</a>
+            <span>-</span>
+            <!--<a href="javascript:;" class="j-channel-delete" data-id="<%= item.id %>" data-name="<%= item.name %>">删除</a>-->
+            <!--<span>-</span>-->
+            <% if(item.channel_status == 0){ %>
+            <a href="javascript:;" class="j-channel-freeze" data-status="1"  data-id="<%= item.id %>" data-name="<%= item.name %>">关闭</a>
+            <% }else { %>
+            <a href="javascript:;" class="j-channel-freeze" data-status="0"  data-id="<%= item.id %>" data-name="<%= item.name %>">激活</a>
+            <% } %>
+            <span>-</span>
+            <a href="channel-detail.html?id=<%= item.id %>">查看详情</a>
+            <span>-</span>
+            <a href="channel-message-config.html?id=<%= item.id %>">消息配置</a>
+        </td>
+    </tr>
+    <% }) %>
+</script>
+</html>

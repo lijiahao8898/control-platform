@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title></title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/goods_management.css" rel="stylesheet" type="text/css">
+    <link href="../style/css/uploader.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <!-- 搜索框 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>搜索框</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-inline fr">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" placeholder="请输入品牌名称" class="form-control form-control-lg" id="keywords">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-success" id="search">搜索</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /搜索框 -->
+
+            <!-- 内容部分 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>品牌列表</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div>
+                        <div class="form-group">
+                            <a class="btn btn-sm btn-success" href="goods-brand-add.html">添加品牌</a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action table-bordered">
+                            <thead>
+                            <tr class="headings">
+                                <th class="tc cell-10">
+                                    <input type="checkbox" id="check-all" class="flat">
+                                </th>
+                                <th class="tc column-title">品牌名称</th>
+                                <th class="tc column-title">ICON</th>
+                                <th class="tc column-title cell-40">描述</th>
+                                <th class="tc column-title">操作</th>
+                                <th class="bulk-actions" colspan="7">
+                                    <a class="antoo">当前选中 ( <span class="action-cnt"> </span> )</a>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody id="brandList">
+                                <tr>
+                                    <td class="tc" colspan="7">没有任何记录!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 页码 -->
+                    <div class="widget-list clearfix ">
+                        <div class="fl pagination">
+                            <button class="btn btn-sm btn-success" id="batchDelete">删除</button>
+                        </div>
+                        <div class="list-page fr">
+                            <span class="pagination-info"></span>
+                            <div class="ui-pagination pagination"></div>
+                        </div>
+                    </div>
+                    <!-- /页码 -->
+
+                </div>
+            </div>
+            <!-- 内容部分 -->
+
+        </div>
+        <!-- /page content -->
+
+        @@include('common/footer.html')
+
+    </div>
+</div>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- rev-hash -->
+<script src="../src/fn/goods-brand.js"></script>
+<!-- end -->
+
+<script type="text/template" id="j-template">
+    <% _.each(items,function(item,index){ %>
+        <tr class="list">
+            <td class="tc"><input type="checkbox" class="checkbox flat" data-id="<%= item.id %>"></td>
+            <td class="tc"><span><%= item.brand_name %></span></td>
+            <td class="tc"><span><img class="image" src="<%= item.logo %>"></span></td>
+            <td class="tc"><p class="ellipsis" style="-webkit-box-orient: vertical;"><%= item.brand_desc || '-' %></p></td>
+            <td class="tc">
+                <a href="goods-brand-add.html?id=<%= item.id %>">编辑</a>
+                <span>-</span>
+                <a href="javascript:;" class="j-brand-delete" data-id="<%= item.id %>" data-name="<%= item.brand_name %>">删除</a>
+            </td>
+        </tr>
+    <% }) %>
+</script>
+</body>
+</html>

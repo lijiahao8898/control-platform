@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>添加账户</title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/channel.css" rel="stylesheet" type="text/css">
+    <link href="../style/css/uploader.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+        @@include('common/uploader.html')
+    </div>
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="x_panel">
+            <div class="x_title">
+                <div class="add-channel-step clearfix">
+                    <span class="col-md-6 col-sm-6 col-xs-6 add-channel-active" data-step_value="1">渠道基本信息</span>
+                    <span class="col-md-6 col-sm-6 col-xs-6" data-step_value="2">账户开通信息</span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <!-- 渠道基本信息 -->
+            <div class="x_content step editorContent" data-now_step="1">
+                <div class="form-inline edit-wrapper">
+                    <div class="form-group field item mb10" >
+                        <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>渠道商名称：</label>
+                        <input class="form-control form-control-410" id="name" required="required" data-name="渠道商名称" type="text" placeholder="请输入渠道商名称">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>公司名称：</label>
+                        <input class="form-control form-control-410" id="company" required="required" data-name="公司名称" type="text" placeholder="请输入公司名称">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>联系人：</label>
+                        <input class="form-control form-control-410" id="linkman" required="required" data-name="联系人" type="text" placeholder="请输入联系人">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>手机号码：</label>
+                        <input class="form-control form-control-410" id="linkphone" required="required" data-name="手机号码" type="text" maxlength="18" placeholder="请输入手机号码" pattern="phone">
+                    </div>
+                    <br/>
+                    <div class="form-group j-no-super field item mb10">
+                        <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>联系地址：</label>
+                        <select class="form-control form-control-sm" required="required" data-name="国家" id="areaList-country" data-nextName="province">
+                            <option>国家</option>
+                            <option data-value="中国" data-code="cn">中国</option>
+                            <option data-value="国外">国外</option>
+                        </select>
+                        <select class="form-control form-control-sm" required="required" data-name="省" id="areaList-province" data-nextName="city">
+                            <option>省</option>
+                        </select>
+
+                        <select class="form-control form-control-sm" required="required" data-name="市" id="areaList-city" data-nextName="area">
+                            <option>市</option>
+                        </select>
+
+                        <select class="form-control form-control-sm" required="required" data-name="区" id="areaList-area" data-nextName="">
+                            <option>区</option>
+                        </select>
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>详细地址：</label>
+                        <input class="form-control form-control-410" id="address" required="required" data-name="详细地址" type="text" placeholder="请输入详细地址">
+                    </div>
+                    <br/>
+                    <div class="form-group mb10">
+                        <label class="ui-label ui-label-hg tr">备注：</label>
+                        <input class="form-control form-control-410" id="comment" data-name="备注" type="text" placeholder="请输入备注">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>商城中文名：</label>
+                        <input class="form-control form-control-410" id="storeChName" required="required" data-name="中文名" type="text" placeholder="请输入商城中文名">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>商城英文名：</label>
+                        <input class="form-control form-control-410" id="storeEnName" required="required" data-name="英文名" type="text" placeholder="请输入商城英文名" pattern="alphanumeric">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>商城账号：</label>
+                        <input class="form-control form-control-410" id="storeAccount" required="required" data-name="账号" type="text" placeholder="请输入商城账号(手机号)" pattern="phone">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>初始密码：</label>
+                        <input class="form-control form-control-410" id="originPwd" required="required" data-name="密码" type="text" placeholder="请输入商城密码" pattern="alphanumeric">
+                    </div>
+                </div>
+                <div class="footer-btn-group">
+                    <a href="javascript:;" class="btn btn-success btn-sm mr10" id="j-next" data-type="2">下一步</a>
+                    <a href="javascript:;" class="btn btn-default btm-sm mr10" id="j-cancel">取消</a>
+                </div>
+            </div>
+
+            <!-- 账户开通信息 -->
+            <div class="x_content step editorContent" data-now_step="2">
+                <div class="form-inline">
+                    <div class="small-title">
+                        <h3>支付配置信息</h3>
+                    </div>
+                    <div class="edit-wrapper">
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>支付方式：</label>
+                            <input type="checkbox" class="flat" name="radio" id="radio-1" value="alipay" checked="checked"/>
+                            <label for="radio-1" class="ml5 mr5">
+                                支付宝
+                            </label>
+                            <input type="checkbox" class="flat" name="radio" id="radio-2" value="wxpay"/>
+                            <label for="radio-2" class="ml5 mr5">
+                                微信
+                            </label>
+                            <input type="checkbox" class="flat" name="radio" id="radio-3" value="unionpay"/>
+                            <label for="radio-3" class="ml5 mr5">
+                                银联
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="pay-type-wrapper edit-wrapper" data-type="alipay">
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>支付宝商户号：</label>
+                            <input class="form-control form-control-410" id="alipayPartner" required="required" name="商户号" data-name="商户号" type="text" placeholder="请输入支付宝商户号">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>支付宝账号：</label>
+                            <input class="form-control form-control-410" id="alipayAccount" required="required" data-name="账号" type="text" placeholder="请输入支付宝账号">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>支付宝商户私钥：</label>
+                            <input class="form-control form-control-410" id="alipayMchPrivateKey" required="required" data-name="商户私钥" type="text" placeholder="请输入支付宝商户私钥">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>支付宝公钥：</label>
+                            <input class="form-control form-control-410" id="alipayPublicKey" required="required" data-name="公钥" type="text" placeholder="请输入支付宝公钥">
+                        </div>
+                        <br/>
+                    </div>
+
+                    <div class="pay-type-wrapper dpnone edit-wrapper" data-type="wxpay">
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信支付H5端APPID：</label>
+                            <input class="form-control form-control-410" id="wechatH5AppId" required="required" data-name="H5端APPID" type="text" placeholder="请输入微信支付H5端APPID">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信支付H5端密钥：</label>
+                            <input class="form-control form-control-410" id="wechatH5AppSecret" required="required" data-name="H5端密钥" type="text" placeholder="请输入微信支付H5端密钥">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信支付H5端商户号：</label>
+                            <input class="form-control form-control-410" id="wechatH5PartnerId" required="required" data-name="H5端商户号" type="text" placeholder="请输入微信支付H5端商户号">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信支付H5端商户Key：</label>
+                            <input class="form-control form-control-410" id="wechatH5PartnerKey" required="required" data-name="H5端商户Key" type="text" placeholder="请输入微信支付H5端商户Key">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信支付app端APPID：</label>
+                            <input class="form-control form-control-410" id="wechatAppAppId" required="required" data-name="app端APPID" type="text" placeholder="请输入微信支付app端APPID">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信支付app端密钥：</label>
+                            <input class="form-control form-control-410" id="wechatAppAppSecret" required="required" data-name="app端密钥" type="text" placeholder="请输入微信支付app端密钥">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信支付app商户号：</label>
+                            <input class="form-control form-control-410" id="wechatAppPartnerId" required="required" data-name="app商户号" type="text" placeholder="请输入微信支付app商户号">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信支付app商户Key：</label>
+                            <input class="form-control form-control-410" id="wechatAppPartnerKey" required="required" data-name="app商户Key" type="text" placeholder="请输入微信支付app商户Key">
+                        </div>
+                        <br/>
+                    </div>
+
+                    <div class="pay-type-wrapper dpnone edit-wrapper" data-type="unionpay">
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>银联商户号：</label>
+                            <input class="form-control form-control-410" id="unionpayMchId" required="required" data-name="银联商户号" type="text" placeholder="请输入银联商户号">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr vat"><span class="required-icon">*</span>上传银联证书：</label>
+                            <div class="imgUploadBtn">
+                                <i class="fa fa-close img-close j-img-close"></i>
+                                <i class="fa fa-plus"></i>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+
+                </div>
+                <div class="form-inline">
+                    <div class="small-title">
+                        <h3>登录配置信息</h3>
+                    </div>
+                    <div class="other-info edit-wrapper">
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信登录H5端APPID：</label>
+                            <input class="form-control form-control-410" id="wechatLoginH5AppId" required="required" data-name="微信登录H5端APPID" type="text" placeholder="请输入微信登录H5端APPID">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信登录H5端密钥：</label>
+                            <input class="form-control form-control-410" id="wechatLoginH5AppSecret" required="required" data-name="微信登录H5端密钥" type="text" placeholder="请输入微信登录H5端密钥">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信登录APP端APPID：</label>
+                            <input class="form-control form-control-410" id="wechatLoginAppAppId" required="required" data-name="微信登录APP端APPID" type="text" placeholder="请输入微信登录APP端APPID">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr"><span class="required-icon">*</span>微信登录APP端密钥：</label>
+                            <input class="form-control form-control-410" id="wechatLoginAppAppSectet" required="required" data-name="微信登录APP端密钥" type="text" placeholder="请输入微信登录APP端密钥">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="small-title">
+                        <h3>其他配置信息</h3>
+                    </div>
+                    <div class="other-info edit-wrapper">
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr">客服电话：</label>
+                            <input class="form-control form-control-410" id="csTel" data-name="客服电话" type="text" placeholder="请输入客服电话">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr">在线客服链接：</label>
+                            <input class="form-control form-control-410" id="csOnlineUrl" data-name="在线客服链接" type="text" placeholder="请输入在线客服链接">
+                        </div>
+                        <br/>
+                        <div class="form-group field item mb10">
+                            <label class="ui-label ui-label-hg tr">关于我们链接：</label>
+                            <input class="form-control form-control-410" id="aboutUs" data-name="关于我们链接" type="text" placeholder="请输入关于我们链接">
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-btn-group">
+                    <a href="javascript:;" class="btn btn-success btn-sm mr10" id="j-submit" data-type="3">保存</a>
+                    <a href="javascript:;" class="btn btn-default btn-sm mr10" id="j-back" data-type="1">返回</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- /page content -->
+
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- rev-hash -->
+<script src="../src/fn/channel-add.js"></script>
+<!-- end -->
+
+<!-- channel area option -->
+<script type="text/template" id="j-template">
+    <option value="null"><%= parent_name %></option>
+    <% _.each(items,function(item,index){ %>
+    <option value="<%= item.id %>" data-region_level="<%= item.region_level %>" data-code="<%= item.code %>">
+        <%= item.name %>
+    </option>
+    <% }) %>
+</script>
+</html>

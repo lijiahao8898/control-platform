@@ -1,0 +1,14 @@
+// 商品小图片的边框
+@mixin border-image {
+  border: 1px solid #26B99A;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px rgba(38, 185, 154, 0.1) inset, 1px 1px 1px rgba(38, 185, 154, 0.1);
+}
+// 统一字体样式一
+@mixin font-style-1 {
+  font-size: 12px;
+}
+// 统一字体样式二
+@mixin font-style-2 {
+  font-size: 14px;
+}

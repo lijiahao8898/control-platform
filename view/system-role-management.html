@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link rel="stylesheet" href="../style/css/system.css">
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+
+    <!-- 内容部分 -->
+    <div class="right_col" role="main" id="role">
+
+        <!-- 搜索 -->
+        <!--<div class="x_panel">-->
+            <!--<div class="x_content">-->
+                <!--<div class="col-md-4 col-sm-12 col-xs-12 form-group pull-right field">-->
+                    <!--<button type="button" class="btn btn-sm btn-success pull-right btn-search">搜索</button>-->
+                    <!--<input type="text" required="required" pattern="decimal" name="渠道名称" placeholder="请输入角色名称" class="form-control form-control-lg pull-right">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!-- 姓名角色-->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>角色列表</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <!-- 添加-->
+                <div class="form-group">
+                    <a class="btn btn-sm btn-success" href="system-role-add.html">添加</a>
+                </div>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped jambo_table bulk_action table-bordered">
+                        <thead>
+                        <tr class="headings">
+                            <!--<th class="tc">-->
+                                <!--<input type="checkbox" id="check-all" class="flat">-->
+                            <!--</th>-->
+                            <th class="column-title tl">角色名称 </th>
+                            <th class="column-title tl">角色说明</th>
+                            <th class="column-title tc">角色人数</th>
+                            <th class="column-title no-link last tc"><span class="nobr">操作</span></th>
+                            <th class="bulk-actions" colspan="7">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="tpl-main">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 页码 -->
+                <div class="widget-list clearfix ">
+                    <div class="fl pagination">
+                        <!--<button class="btn btn-sm btn-success" id="batchDelete">批量删除</button>-->
+                    </div>
+                    <div class="list-page fr">
+                        <span class="pagination-info"></span>
+                        <div class="ui-pagination pagination"></div>
+                    </div>
+                </div>
+                <!-- /页码 -->
+            </div>
+        </div>
+    </div>
+    <!-- page content -->
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+
+<!-- rev-hash -->
+<script src="../src/fn/system-role-management.js"></script>
+<script type="text/template" id="tpl">
+<% _.each(data,function(item){ %>
+<tr class="even pointer">
+    <!--<td class="a-center tc">-->
+        <!--<input type="checkbox" class="checkbox flat" name="table_records" data-id="<%= item.id %>">-->
+    <!--</td>-->
+    <td class="tl"><%= item.role_name %></td>
+    <td class="tl"><%= item.role_desc %> </td>
+    <td class="tc"><%= item.total || '0' %></td>
+    <td class="tc last">
+        <a href="system-role-add.html?id=<%= item.id %>">编辑</a>
+        <span class="table-line">&nbsp;-&nbsp;</span>
+        <a href="javascript:;" data-id="<%= item.id %>" data-name="<%= item.role_name %>" class="j-del">删除</a>
+    </td>
+</tr>
+<% }) %>
+</script>
+<!-- end -->
+</html>
+

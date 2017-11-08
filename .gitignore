@@ -1,0 +1,14 @@
+.idea/
+node_modules/
+.DS_Store
+build/
+html/
+production/
+documentation/
+bower.json
+changelog.md
+vendors/
+.sass-cache/
+style/css/
+html.zip
+.gitlab-ci.yml

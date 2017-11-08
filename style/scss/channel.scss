@@ -1,0 +1,159 @@
+/******************************* 添加渠道 ***************************/
+.add-channel-step {
+  padding-bottom: 25px;
+  span {
+    display: inline-block;
+    padding: 10px 25px;
+    text-align: center;
+    background: #e5e5e5;
+    border: 1px solid #e5e5e5;
+  }
+  span.add-channel-active {
+    color: #73879C;
+    background: #fff;
+    border-bottom: none;
+  }
+}
+
+.step[data-now_step='2'] {
+  display: none;
+}
+
+.small-title h3 {
+  position: relative;
+  background: #f8f8f8;
+  padding: 10px;
+  color: #ccc;
+  font-size: 16px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.goods-name {
+  display: block;
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.imgUploadBtn {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  border: 2px solid #73879c;
+  cursor: pointer;
+  position: relative;
+  .fa.fa-plus{
+    position: absolute;
+    left: 50px;
+    top:50px;
+  }
+  .image{
+    width: 116px;
+    height: 116px;
+    position: relative;
+    z-index: 1;
+  }
+  .img-close{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1px 3px;
+    background: rgba(0,0,0,0.5);
+    cursor: pointer;
+    z-index: 20;
+    &:before{
+      position: absolute;
+      left: 48px;
+      top: 48px;
+      padding: 4px 5px;
+      background: #fff;
+      border-radius: 50%;
+    }
+  }
+}
+
+/*************************** 渠道关联商品 ****************************/
+.form-inline{
+  .form-group.channel-name-list{
+    display: none;
+  }
+}
+.channel-name-lists{
+  .channel-detail{
+    display: inline-block;
+    padding: 0 10px;
+    text-align: center;
+    position: relative;
+    width: 80px;
+    height: 60px;
+    .channel-img{
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+    }
+    span{
+      display: block;
+      font-size: 12px;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .img-close{
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1px 3px;
+      background: rgba(0,0,0,0.5);
+      cursor: pointer;
+      z-index: 20;
+      border-radius: 4px;
+      &:before{
+        position: absolute;
+        left: 30px;
+        top: 20px;
+        padding: 4px 5px;
+        background: #fff;
+        border-radius: 50%;
+      }
+    }
+  }
+  .channel-detail:hover .img-close{
+    display: inline-block;
+  }
+}
+
+.channel-dialog-wrapper,.export-dialog-wrapper{
+  height: 450px;
+  overflow: scroll;
+}
+.tab-list{
+  overflow: hidden;
+}
+
+/*********** 渠道消息配置 *************/
+.message-table{
+  display: inline-block;
+  width: 340px;
+}
+.config-wrapper{
+  .form-inline{
+    padding: 30px;
+    background: #F5F7FA;
+    .form-group{
+      margin-bottom: 10px;
+      .token{
+        display: inline-block;
+        width: 260px;
+      }
+    }
+  }
+}

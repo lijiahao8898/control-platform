@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>添加账户</title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/system.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+    <div class="right_col" role="main" id="account">
+
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    <small></small>
+                </h2>
+            </div>
+            <div class="x_content editorContent">
+                <div class="form-inline">
+                    <div class="form-group j-no-super field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="ui-form-required">*</span>姓名：</label>
+                        <input class="form-control form-control-hg" id="name" required="required" data-name="姓名"
+                               type="text" maxlength="18" placeholder="请输入姓名">
+                    </div>
+                    <br/>
+                    <div class="form-group j-no-super field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="ui-form-required">*</span>角色：</label>
+                        <select class="form-control form-control-hg" id="roleList">
+                        </select>
+                    </div>
+                    <br/>
+                    <div class="form-group j-super field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="ui-form-required">*</span>用户名：</label>
+                        <input class="form-control form-control-hg" required="required" data-name="用户名" id="user_name"
+                               type="text" maxlength="18" placeholder="请输入用户名">
+                    </div>
+                    <br/>
+                    <div class="form-group j-super field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="ui-form-required">*</span>初始密码：</label>
+                        <input class="form-control form-control-hg" required="required" data-name="初始密码" id="password"
+                               type="password" maxlength="20" data-validate-length-range="6,20"
+                               placeholder="请输入6~20位密码">
+                    </div>
+                    <br/>
+                    <div class="form-group j-super field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="ui-form-required">*</span>确认密码：</label>
+                        <input class="form-control form-control-hg" required="required" data-name="确认密码" id="password_v"
+                               type="password" maxlength="20" data-validate-length-range="6,20"
+                               placeholder="请输入6~20位密码">
+                    </div>
+                    <br/>
+                    <div class="item form-group">
+                        <label class="ui-label ui-label-lg tr">* 状态：</label>
+                        <label for="radio-1" class="ml5 mr5 radio-right">
+                            正常
+                        </label>
+                        <input type="radio" class="flat" name="radio" id="radio-1" data-value="1" checked="checked"/>
+                        <label for="radio-2" class="ml5 mr5 radio-right">
+                            禁用
+                        </label>
+                        <input type="radio" class="flat" name="radio" id="radio-2" data-value="0"/>
+                    </div>
+                </div>
+                <div class="footer-btn-group">
+                    <a href="javascript:;" class="btn btn-success btn-sm mr10" id="j-submit">保存</a>
+                    <a href="javascript:;" class="btn btn-default btm-sm ml10" id="j-cancel">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /page content -->
+
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- rev-hash -->
+<script src="../src/fn/system-account-add.js"></script>
+<!-- end -->
+
+<!-- 角色select -->
+<script type="text/template" id="j-template">
+    <option value="null">--请选择--</option>
+    <% _.each(items,function(item,index){ %>
+    <option value="<%= item.id %>">
+        <%= item.role_name %>
+    </option>
+    <% }) %>
+</script>
+
+</html>

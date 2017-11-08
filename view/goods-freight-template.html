@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+    <!-- rev-hash -->
+    <link href="../style/css/goods_management.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+
+    <!-- 内容部分 -->
+    <div class="right_col" role="main" id="freightTemplate">
+
+        <!-- 搜索 -->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    <small>搜索框</small>
+                </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-md-4 col-sm-12 col-xs-12 form-group pull-right">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" placeholder="请输入模板名称" class="form-control form-control-lg pull-right" id="keywords">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-sm btn-success pull-right btn-search" id="search">搜索</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        <!-- 姓名角色-->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    <small>运费模板列表</small>
+                </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <!-- 添加-->
+                <div class="form-group">
+                    <a class="btn btn-sm btn-success" href="goods-freight-template-new.html">添加</a>
+                </div>
+                <div class="template-main">
+
+                </div>
+
+
+                <!-- 页码 -->
+                <div class="widget-list clearfix ">
+                    <div class="list-page fr">
+                        <span class="pagination-info"></span>
+                        <div class="ui-pagination pagination"></div>
+                    </div>
+                </div>
+                <!-- /页码 -->
+            </div>
+        </div>
+    </div>
+    <!-- page content -->
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+
+<!-- rev-hash -->
+<script src="../src/fn/goods-freight-template.js"></script>
+<!-- end -->
+
+<!-- 运费模板渲染-->
+<script type="text/template" id="j-template">
+    <% _.each(data, function (item) { %>
+    <div class="table-responsive">
+        <div class="carriage-title clearfix">
+            <div class="pull-left"><span><%= item.name %></span></div>
+            <div class="pull-right">
+                <a data-id="<%= item.id %>" class="J_copy" href="javascript:;">复制模板</a>
+                <a href="goods-freight-template-new.html?id=<%= item.id %>">修改</a>
+                <a data-id="<%= item.id %>" class="J_del" href="javascript:;">删除</a>
+            </div>
+        </div>
+        <table class="table table-striped jambo_table bulk_action table-bordered ">
+            <thead>
+            <tr class="headings">
+                <th class="col-md-4">运送到</th>
+                <th class="col-md-2">
+                    <% if ( item.pricing_method == 0 ) { %>
+                    <span>首件（件）</span>
+                    <% }else if ( item.pricing_method == 1 ) { %>
+                    <span>首重（kg）</span>
+                    <% } else if ( item.pricing_method == 2 ) { %>
+                    <span>首体积（m³）</span>
+                    <% } %>
+                </th>
+                <th class="col-md-2">运费（元）</th>
+                <th class="col-md-2">
+                    <% if ( item.pricing_method == 0 ) { %>
+                    <span>续件（件）</span>
+                    <% }else if ( item.pricing_method == 1 ) { %>
+                    <span>续重（kg）</span>
+                    <% } else if ( item.pricing_method == 2 ) { %>
+                    <span>续体积（m³）</span>
+                    <% } %>
+                </th>
+                <th class="col-md-2">续费（元）</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>全国</td>
+                <% if ( item.pricing_method == 0 ) { %>
+                <td><%= item.basic_count %></td>
+                <% }else{ %>
+                <td><%= (item.basic_count)/10 %></td>
+                <% } %>
+                <td><%= (item.basic_charge)/100 %></td>
+                <% if ( item.pricing_method == 0 ) { %>
+                <td><%= item.extra_count %></td>
+                <% }else{ %>
+                <td><%= (item.extra_count)/10 %></td>
+                <% } %>
+                <td><%= (item.extra_charge)/100 %></td>
+            </tr>
+            <% _.each(item.freight_area_template_list, function(o){ %>
+            <tr>
+                <td>
+                    <% _.each(o.areas,function(i){ %>
+                    <span data-level="<%= i.level%>" data-id="<%= i.code%>"><%= i.name %>、</span>
+                    <% }) %>
+                </td>
+                <% if ( item.pricing_method == 0 ) { %>
+                <td><%= o.basic_count %></td>
+                <% }else{ %>
+                <td><%= (o.basic_count)/10 %></td>
+                <% } %>
+                <td><%= (o.basic_charge)/100 %></td>
+                <% if ( item.pricing_method == 0 ) { %>
+                <td><%= o.extra_count %></td>
+                <% }else{ %>
+                <td><%= (o.extra_count)/10 %></td>
+                <% } %>
+                <td><%= (o.extra_charge)/100 %></td>
+            </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <% }); %>
+</script>
+</html>

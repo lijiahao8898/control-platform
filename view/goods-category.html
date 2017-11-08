@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title></title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/goods_management.css" rel="stylesheet" type="text/css">
+    <link href="../style/css/uploader.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+        @@include('common/uploader.html')
+        @@include('../src/plugin/select-plugin/select-plugin.html')
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <!-- 内容部分 -->
+            <div class="x_panel">
+
+                <div class="x_title">
+                </div>
+                <!-- 选择类目 -->
+                <div class="x_content">
+                    <div class="categories">
+                        <div class="add-goods-categories mr10">
+                            <div class="category-title">
+                                <span>一级类目</span>
+                            </div>
+                            <div id="add-goods-category-1" class="category-list"></div>
+                            <div class="add-category j-add-category" data-type="1">
+                                <a href="javascript:;"><i class="fa fa-plus-circle"></i>添加分类</a>
+                            </div>
+                        </div>
+                        <div class="add-goods-categories">
+                            <div class="category-title">
+                                <span>二级类目</span>
+                            </div>
+                            <div id="add-goods-category-2" class="category-list"></div>
+                            <div class="add-category j-add-category" data-type="2">
+                                <a href="javascript:;"><i class="fa fa-plus-circle"></i>添加分类</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="add-goods-footer clearfix">-->
+                        <!--<div class="col-md-4 col-sm-4 col-xs-4">-->
+                            <!--&lt;!&ndash;<span>您最近使用的类目：</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<select class="form-control form-control-md dib">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<option>美食 > 火龙果</option>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2 col-sm-2 col-xs-2">&nbsp;</div>-->
+                        <!--<div class="col-md-6 col-sm-6 col-xs-6 tr">-->
+                            <!--<span>当前选择：</span>-->
+                            <!--<span class="mr10 currentCategory"></span>-->
+                            <!--<a href="javascript:;" class="btn btn-success btn-sm" id="nextStep" disabled="disabled" data-type="next">-->
+                                <!--请选择类目-->
+                            <!--</a>-->
+                            <!--&lt;!&ndash;<a href="javascript:;" class="btn btn-success btn-sm" id="nextStep" data-type="next">&ndash;&gt;-->
+                            <!--&lt;!&ndash;下一步&ndash;&gt;-->
+                            <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <!-- 选择类目 end -->
+
+            </div>
+            <!-- 内容部分 -->
+
+        </div>
+        <!-- /page content -->
+
+        @@include('common/footer.html')
+
+    </div>
+</div>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- rev-hash -->
+<script src="../src/plugin/sortable/jquery.fn.sortable.js"></script>
+<script src="../src/fn/goods-category.js"></script>
+<!-- end -->
+
+<!-- 类目模板 -->
+<script type="text/template" id="template-category">
+    <% if( items.length > 0 ){ %>
+    <ul id="sortable-level-<%= items[0].parent_id %>">
+        <% _.each(items,function(item,index){ %>
+        <li class="clear" data-id="<%= item.id %>" data-parent_id="<%= item.parent_id %>" data-cate_level="<%= item.cate_level %>" data-name="<%= item.cate_name %>" data-img="<%= item.image_url %>" data-sub_cate="<%= encodeURIComponent(JSON.stringify(item.sub_categorys)) %>">
+            <span class="sortable-handle mr10">☰</span>
+            <% if( item.image_url && item.cate_level != 1 ){ %>
+            <span><img class="category-img-icon" src="<%= item.image_url %>"></span>
+            <% } %>
+            <span><%= item.cate_name %></span>
+            <% if( item.image_url ){ %>
+            <a class="j-edit-category edit-category has-icon" href="javascript:;"><i class="fa fa-edit"></i></a>
+            <a class="j-delete-category delete-category has-icon" href="javascript:;"><i class="fa fa-trash"></i></a>
+            <% }else{ %>
+            <a class="j-edit-category edit-category" href="javascript:;"><i class="fa fa-edit"></i></a>
+            <a class="j-delete-category delete-category" href="javascript:;"><i class="fa fa-trash"></i></a>
+            <% } %>
+        </li>
+        <% }) %>
+    </ul>
+    <% }else{ %>
+    <ul>
+        <li class="tc">
+            <a href="javascript:;">当前无类目~</a>
+        </li>
+    </ul>
+    <% } %>
+</script>
+</body>
+</html>

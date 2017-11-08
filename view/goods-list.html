@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title></title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/goods_management.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <!-- 搜索框 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>搜索框</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-inline fr">
+                        <div class="form-group">
+                            <select id="deliveryType" class="form-control form-control-sm">
+                                <option value="">请选择类型</option>
+                                <option value="1">跨境商品</option>
+                                <option value="2">海外直邮</option>
+                                <option value="3">国内商品</option>
+                                <option value="4">一般贸易</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select id="freezeStatus" class="form-control form-control-sm">
+                                <option value="">请选择状态</option>
+                                <option value="1">正常</option>
+                                <option value="2">冻结</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select id="add-goods-category-1" class="form-control form-control-sm categories">
+                                <option value="">请选择品类</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="categoryChildren">
+                            <select id="add-goods-category-2" class="form-control form-control-md categories">
+                                <option value="">请选择二级品类</option>
+                            </select>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <select id="brandList"></select>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <select id="storage-template-selectize"></select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="请输入商品名称" class="form-control form-control-lg" id="key">
+                        </div>
+                        <button type="button" class="btn btn-sm btn-success ml10" id="search">搜索</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /搜索框 -->
+
+            <!-- 内容部分 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>商品列表</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="" role="tabpanel">
+                        <ul id="goodsTab" class="nav nav-tabs bar_tabs right" role="tablist">
+                            <li role="presentation" class="" data-type="-1">
+                                <a href="#" role="tab" data-toggle="tab" aria-controls="回收站" aria-expanded="true">回收站</a>
+                            </li>
+                            <li role="presentation" class="active">
+                                <a href="#" role="tab" data-toggle="tab" aria-controls="全部" aria-expanded="false">全部</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <a class="btn btn-sm btn-success" id="add-goods" href="goods.html">添加商品</a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-striped jambo_table bulk_action table-bordered">
+                            <thead>
+                            <tr class="headings">
+                                <th class="tc cell-5">
+                                    <input type="checkbox" id="check-all" class="flat">
+                                </th>
+                                <th class="column-title tc cell-25">商品标题</th>
+                                <th class="column-title tc cell-5">类目</th>
+                                <th class="column-title tc cell-5">类型</th>
+                                <th class="column-title tc cell-5">品牌</th>
+                                <th class="column-title tc cell-10">分享汇成本价(元)</th>
+                                <th class="column-title tc cell-10"><a href="javascript:;" class="j-order-by green" data-order_by="stock_num"><span></span>库存</a></th>
+                                <th class="column-title tc cell-10">税率&nbsp;/&nbsp;起征点</th>
+                                <th class="column-title tc cell-10">添加时间</th>
+                                <th class="column-title tc cell-5">状态</th>
+                                <th class="column-title tc cell-25">操作</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="goodsList">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 页码 -->
+                    <div class="widget-list clearfix ">
+                        <div class="fl pagination">
+                            <button class="btn btn-sm btn-success" id="j-batch-trash">加入回收站</button>
+                            <button class="btn btn-sm btn-success dpnone mr10" id="j-batch-restore">恢复</button>
+                            <button class="btn btn-sm btn-success dpnone" id="j-batch-delete">彻底删除</button>
+                        </div>
+                        <div class="list-page fr">
+                            <span class="pagination-info"></span>
+                            <div class="ui-pagination pagination"></div>
+                        </div>
+                    </div>
+                    <!-- /页码 -->
+
+                </div>
+            </div>
+            <!-- 内容部分 -->
+
+        </div>
+        <!-- /page content -->
+
+        @@include('common/footer.html')
+
+    </div>
+</div>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- rev-hash -->
+<script src="../src/fn/goods-list.js"></script>
+<!-- end -->
+
+<!-- 商品列表 -->
+<script type="text/template" id="j-template">
+    <% _.each(items,function(item,index){ %>
+    <tr class="list">
+        <td class="tc"><input type="checkbox" class="checkbox flat" data-id="<%= item.id %>"></td>
+        <td>
+            <dl>
+                <dt><img class="goods-image" src="<%= item.icon_url %>"></dt>
+                <dd class="ellipsis" style="-webkit-box-orient:vertical">
+                    <a data-toggle="tooltip" data-placement="top" data-original-title="<%= item.item_name %>"><%= item.item_name %></a>
+                </dd>
+            </dl>
+        </td>
+        <td class="tc"><%= item.category_name %></td>
+        <td class="tc"><%= ['-','跨境商品','海外直邮','国内商品','一般贸易'][item.delivery_type] %></td>
+        <td class="tc"><%= item.brand_name %></td>
+        <td class="tc"><%= item.cost_price ? (item.cost_price/100).toFixed(2) : '-' %></td>
+        <td class="tc"><%= item.stock_num %></td>
+        <td class="tc"><%= item.tax_rate %>&nbsp;/&nbsp;<%= item.tax_threshold %></td>
+        <td class="tc"><%= item.gmt_created %></td>
+        <td class="tc"><%= ['-','正常','冻结'][item.freeze] %></td>
+        <td class="tc">
+            <% if(type == -1){ %>
+            <a href="javascript:;" data-id="<%= item.id %>" data-name="<%= item.item_name %>" class="j-restore">恢复</a>
+            <span>-</span>
+            <a href="javascript:;" data-id="<%= item.id %>" data-name="<%= item.item_name %>" class="j-delete">彻底删除</a>
+            <% }else{ %>
+            <a href="goods.html?id=<%= item.id %>&edit=0">查看</a>
+            <span>-</span>
+            <a href="goods.html?id=<%= item.id %>&edit=1">编辑</a>
+            <span>-</span>
+            <a href="javascript:;" data-id="<%= item.id %>" data-name="<%= item.item_name %>" class="j-trash">加入回收站</a>
+            <span>-</span>
+            <% if( item.freeze == 1 ){ %>
+            <a href="javascript:;" data-id="<%= item.id %>" data-name="<%= item.item_name %>" data-freeze="<%= item.freeze %>" class="j-freeze">冻结</a>
+            <% }else{ %>
+            <a href="javascript:;" data-id="<%= item.id %>" data-name="<%= item.item_name %>" data-freeze="<%= item.freeze %>" class="j-freeze">解冻</a>
+            <% } %>
+            <!--<span>-</span>-->
+            <!--<a href="javascript:;"  data-id="<%= item.id %>" data-name="<%= item.item_name %>" class="j-edit-cost-price">填写成本价</a>-->
+            <span>-</span>
+            <a href="javascript:;" class="j-current-channel-list" data-id="<%= item.id %>">查看已关联的渠道</a>
+            <% } %>
+        </td>
+    </tr>
+    <% }) %>
+</script>
+
+<!-- 品牌 -->
+<script type="text/template" id="j-template-brand">
+    <option value="">请选择品牌</option>
+    <% _.each(items,function(item,index){ %>
+    <option value="<%= item.id %>"><%= item.brand_name %></option>
+    <% }) %>
+</script>
+
+<!-- 品类 -->
+<script type="text/template" id="j-template-category">
+    <% if(type == 1){ %>
+    <option value="">请选择品类</option>
+    <% }else{ %>
+    <option value="">请选择二级品类</option>
+    <% } %>
+    <% _.each(items,function(item,index){ %>
+    <option value="<%= item.id %>" data-cate_level="<%= item.cate_level %>" data-parent_id="<%= item.parent_id %>" data-sub_cate="<%= encodeURIComponent(JSON.stringify(item.sub_categorys)) %>"><%= item.cate_name %></option>
+    <% }) %>
+</script>
+
+<!-- 商品成本价 -->
+<script type="text/template" id="j-template-sku">
+    <div class="table-responsive" id="skuList">
+    </div>
+</script>
+
+<!-- 商品成本价 - table -->
+<script type="text/template" id="j-template-sku-table">
+    <table class="table table-bordered">
+        <thead>
+        <tr class="headings">
+            <th class="column-title tc cell-20">商品名称</th>
+            <th class="column-title tc cell-60" colspan="<%= 2*(items[0].prop.length) %>">规格</th>
+            <th class="column-title tc cell-20">成本价</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% _.each(items,function(item,index){ %>
+        <% if( index == 0 ){ %>
+        <tr>
+            <td class="tc" rowspan="<%= items.length %>"><%= name %></td>
+            <% _.each(item.prop,function(n,i){ %>
+            <td rowspan="<%= items.length %>">
+                <span><%= n.prop_name || '-' %></span>
+            </td>
+            <td>
+                <span><%= n.value_name || '-' %></span>
+            </td>
+            <% }) %>
+            <td>
+                <input class="form-control form-control-md">
+            </td>
+        </tr>
+        <% }else{ %>
+        <tr>
+            <% _.each(item.prop,function(n,i){ %>
+            <td>
+                <span><%= n.value_name || '-' %></span>
+            </td>
+            <% }) %>
+            <td>
+                <input class="form-control form-control-md">
+            </td>
+        </tr>
+        <% } %>
+        <% }) %>
+        </tbody>
+    </table>
+</script>
+
+<script type="text/template" id="j-template-channel-list">
+    <table class="table table-striped jambo_table bulk_action table-bordered">
+        <thead>
+            <tr>
+                <th class="tc">渠道商ID</th>
+                <th class="tc">渠道商名称</th>
+                <th class="tc">联系人</th>
+                <th class="tc">电话</th>
+                <th class="tc">商城名称</th>
+                <th class="tc">状态</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% if( items.length > 0 ){ %>
+            <% _.each(items, function(item, index){ %>
+            <tr>
+                <td class="tc"><%= item.id %></td>
+                <td class="tc"><%= item.name %></td>
+                <td class="tc"><%= item.linkman %></td>
+                <td class="tc"><%= item.linkphone %></td>
+                <td class="tc"><%= item.store_ch_name %></td>
+                <td class="tc"><%= ['激活','关闭'][item.channel_status] %></td>
+            </tr>
+            <% }) %>
+        <% }else{ %>
+            <tr>
+                <td colspan="18" class="tc">没有任何记录~</td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>登陆</title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/login.css" rel="stylesheet" type="text/css">
+    <!--<link href="../src/plugin/particleground/demo/css/style.css">-->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <!-- inject:js -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <script src="../src/plugin/particleground/jquery.particleground.js"></script>
+    <script src="../src/fn/login.js"></script>
+    <!-- end -->
+</head>
+
+<body class="login">
+<div class="login-content">
+    <div id="backgroundJs"></div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+    <div  contenteditable="true" class="login-top">
+        <p class="login-title">纷享汇管理后台</p>
+    </div>
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <form class="form-inline">
+                    <h1>登录</h1>
+                    <div class="form-group item field mb20">
+                        <div class="input-group">
+                            <span class="input-group-addon"><font><i class="fa fa-user"></i></font></span>
+                            <input type="text" class="form-control" placeholder="请输入用户名" required="required" data-name="用户名" id="username"/>
+                        </div>
+                        <!--<label class="tr mr10"><i class="fa fa-user"></i></label>-->
+                        <!--<input type="text" class="form-control" placeholder="请输入用户名" required="required" data-name="用户名" id="username"/>-->
+                    </div>
+                    <div class="form-group item field mb20">
+                        <div class="input-group">
+                            <span class="input-group-addon"><font><i class="fa fa-lock"></i></font></span>
+                            <input type="password" class="form-control" placeholder="请输入密码" required="required" data-name="密码" id="password"/>
+                        </div>
+                    </div>
+                    <div class="form-group item field mb20">
+                        <input type="text" class="form-control verify-input mr10" id="verify" placeholder="请输入验证码" required="required" data-name="验证码">
+                        <span class="verify">
+                             <script>
+                                 document.write('<img id="verifyCode" title="看不清？换一张" src="'+ Api.domain() + '/verify_code.do" />')
+                             </script>
+                        </span>
+                    </div>
+                    <div class="forget-secret-wrap tr">
+                        <a href="forget-secret.html" class="forget-secret">忘记密码？</a>
+                    </div>
+                    <div>
+                        <a class="btn btn-success btn-success-lg submit" href="javascript:;" id="j-submit" style="width:100%">登 录</a>
+                        <!--<a class="btn btn-default to_register" href="#signup">注册</a>-->
+                        <!--<a class="reset_pass" href="#">Lost your password?</a>-->
+                    </div>
+
+                    <!--<div class="clearfix"></div>-->
+
+                    <!--<div class="separator">-->
+                        <!--<p class="change_link">New to site?-->
+                            <!--<a href="#signup" class="to_register"> Create Account </a>-->
+                        <!--</p>-->
+
+                        <!--<div class="clearfix"></div>-->
+                        <!--<br />-->
+
+                        <!--<div>-->
+                            <!--<h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>-->
+                            <!--<p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </form>
+            </section>
+        </div>
+
+        <!--<div id="register" class="animate form registration_form">-->
+            <!--<section class="login_content">-->
+                <!--<form>-->
+                    <!--<h1>注册</h1>-->
+                    <!--<div>-->
+                        <!--<input type="text" class="form-control" placeholder="用户名" required="" />-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<input type="email" class="form-control" placeholder="邮箱" required="" />-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<input type="password" class="form-control" placeholder="密码" required="" />-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<input type="password" class="form-control" placeholder="确认密码" required="" />-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<a class="btn btn-default submit" href="index.html">提交</a>-->
+                        <!--<a class="btn btn-default submit" href="#signin">登录</a>-->
+                    <!--</div>-->
+
+                    <!--<div class="clearfix"></div>-->
+
+                    <!--<div class="separator">-->
+                        <!--<p class="change_link">Already a member ?-->
+                            <!--<a href="#signin" class="to_register"> Log in </a>-->
+                        <!--</p>-->
+
+                        <!--<div class="clearfix"></div>-->
+                        <!--<br />-->
+
+                        <!--<div>-->
+                            <!--<h1><i class="fa fa-paw"></i>1</h1>-->
+                            <!--<p>1</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</section>-->
+        <!--</div>-->
+    </div>
+    <div class="login-bottom">
+        <p>Copyright © 2015-2016 杭州魔筷科技有限公司 浙ICP备15018042号-1</p>
+    </div>
+</div>
+
+</body>
+</html>

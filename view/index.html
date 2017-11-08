@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title></title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/index.css" rel="stylesheet" type="text/css">
+    <link href="../src/plugin/nprogress/css/nprogress.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="x_panel">
+                <a href="goods.html" class="btn btn-success btn-md mr10" data-type="next">发布商品</a>
+                <a href="channel-management.html" class="btn btn-success btn-md mr10" data-type="next">渠道管理</a>
+                <a href="market-open-shop-history.html" class="btn btn-success btn-md mr10" data-type="next">店铺管理</a>
+            </div>
+
+            <!-- 数据展示 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content" id="brandList">
+                    <!-- top tiles -->
+
+                    <!-- /top tiles -->
+                </div>
+            </div>
+
+            <!-- 访客趋势 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>访客趋势（UV)</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="tc">访客数</p>
+                        <div id="graph_line2003" style="width:100%; height:300px;"></div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="tc">新增访客数</p>
+                        <div id="graph_line7001" style="width:100%; height:300px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 订单趋势 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>订单趋势</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="tc">付款笔数</p>
+                        <div id="graph_line1002" style="width:100%; height:300px;"></div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="tc">下单笔数</p>
+                        <div id="graph_line1001" style="width:100%; height:300px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 销售趋势 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>销售趋势</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="tc">销售额</p>
+                        <div id="graph_line1004" style="width:100%; height:300px;"></div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <p class="tc">客单价</p>
+                        <div id="graph_line2001" style="width:100%; height:300px;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /page content -->
+
+        @@include('common/footer.html')
+
+    </div>
+</div>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- morris.js -->
+<script src="../src/plugin/nprogress/js/nprogress.min.js"></script>
+<script src="../src/plugin/raphael/raphael.min.js"></script>
+<script src="../src/plugin/morris.js/morris.min.js"></script>
+
+<!-- rev-hash -->
+<script src="../src/fn/index.js"></script>
+<!-- end -->
+
+<!-- 数据展示牌 -->
+<script type="text/template" id="j-template-brand">
+    <div class="row tile_count">
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">昨日PV</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">昨日UV</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">昨日新增用户</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">昨日新增分享合伙人</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">月累计分享合伙人数</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">月累计店铺数</span>
+        </div>
+    </div>
+    <div class="row tile_count">
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">商品总数</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">昨日订单数</span>
+        </div>
+        <!-- <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">2500</div>
+            <span class="count_bottom">昨日总毛利</span>
+        </div> -->
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">月累计订单数</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">待发货订单</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">申请售后订单</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">平均客单价</span>
+        </div>
+    </div>
+    <div class="row tile_count">
+
+        <!-- <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">2500</div>
+            <span class="count_bottom">月累计总毛利</span>
+        </div> -->
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">昨日销售额</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">月累计销售额</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">昨日总毛利</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">月累计总毛利</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">昨日利润</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">月累计极润</span>
+        </div>
+    </div>
+    <div class="row tile_count">
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">累计渠道奖励</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">累计店铺奖励</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count tc">
+            <div class="count green">-</div>
+            <span class="count_bottom">累计分享合伙人奖励</span>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+
+</body>
+</html>

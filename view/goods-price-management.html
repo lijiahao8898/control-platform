@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title></title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/goods_management.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <!-- 搜索框 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>搜索框</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-inline fr">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" placeholder="请输入商品名称或ean" class="form-control form-control-lg" id="key">
+                                <span class="input-group-btn"><button type="button" class="btn btn-sm btn-success" id="search">搜索</button></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /搜索框 -->
+
+            <!-- 内容部分 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>商品列表</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-striped jambo_table bulk_action table-bordered">
+                            <thead>
+                            <tr class="headings">
+                                <th class="tc cell-5">
+                                    <input type="checkbox" id="check-all" class="flat">
+                                </th>
+                                <th class="column-title tc cell-20">商品标题</th>
+                                <th class="column-title tc cell-20">商品规格</th>
+                                <th class="column-title tc cell-10">EAN</th>
+                                <th class="column-title tc cell-10">供应商报价(元)</th>
+                                <th class="column-title tc cell-10">运营成本费用率(%)</th>
+                                <th class="column-title tc cell-10">分享汇成本价(元)</th>
+                                <th class="column-title tc cell-10">结算价(元)</th>
+                                <th class="column-title tc cell-10">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="goodsList">
+                                <tr class="tc">
+                                    <td colspan="18">没有任何记录!</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="tr">批量设置：</td>
+                                    <td class="tc">
+                                        <a href="javascript:;" class="j-batch" data-type="1">供应商报价</a>
+                                        <input class="form-control form-control-sm dpnone" data-set_type="1">
+                                    </td>
+                                    <td class="tc">
+                                        <a href="javascript:;" class="j-batch" data-type="2">运营成本费用率</a>
+                                        <input class="form-control form-control-sm dpnone" data-set_type="2">
+                                    </td>
+                                    <td class="tc">
+                                        <a href="javascript:;" class="j-batch" data-type="3">分享汇成本价</a>
+                                        <input class="form-control form-control-sm dpnone" data-set_type="3">
+                                    </td>
+                                    <td class="tc">
+                                        <a href="javascript:;" class="j-batch" data-type="4">结算价</a>
+                                        <input class="form-control form-control-sm dpnone" data-set_type="4">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <!-- 页码 -->
+                    <div class="widget-list clearfix ">
+                        <div class="fl pagination">
+                            <button class="btn btn-sm btn-success" id="batchSubmit" >提交</button>
+                        </div>
+                        <div class="list-page fr">
+                            <span class="pagination-info"></span>
+                            <div class="ui-pagination pagination"></div>
+                        </div>
+                    </div>
+                    <!-- /页码 -->
+
+                </div>
+            </div>
+            <!-- 内容部分 -->
+
+        </div>
+        <!-- /page content -->
+
+        @@include('common/footer.html')
+
+    </div>
+</div>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- rev-hash -->
+<script src="../src/fn/goods-price-management.js"></script>
+<!-- end -->
+
+<!-- 商品列表 -->
+<script type="text/template" id="j-template">
+    <% _.each(items,function(item,index){ %>
+        <% if(item.item_sku_dto_list.length > 0){ %>
+        <% _.each(item.item_sku_dto_list, function(obj, i){ %>
+            <% if( i == 0 ){ %>
+                <tr class="list-<%= item.id %>" data-sku_id="<%= obj.id %>">
+                    <td class="tc cell-5 list" rowspan="<%= item.item_sku_dto_list.length %>"><input type="checkbox" class="checkbox flat" data-item_id="<%= item.id %>"></td>
+                    <td class="cell-20" rowspan="<%= item.item_sku_dto_list.length %>"><%= item.item_name %></td>
+                    <td class="cell-20">
+                    <% _.each(obj.sku_property_dto_list, function(o,n){ %>
+                        <% if( o.name && o.value ){ %>
+                        <span><%= o.name %>：</span>
+                        <span><%= o.value %></span>；
+                        <% }else{ %>
+                         -
+                        <% } %>
+                    <% }) %>
+                    </td>
+                    <td class="tc">
+                        <% if( obj.bar_code ){ %>
+                        <span><%= obj.bar_code %></span>
+                        <% }else{ %>
+                        -
+                        <% } %>
+                    </td>
+                    <td class="tc cell-10 field item">
+                        <input data-input_type="1" type="text" class="form-control form-control-sm price-so" value="<%= obj.supplier_cost ? (obj.supplier_cost/100).toFixed(2) : '' %>" required="required" pattern="decimal" data-validate-length-range="1,10">
+                    </td>
+                    <td class="tc cell-10 field item">
+                        <input data-input_type="2" type="text" class="form-control form-control-sm price-ocr" value="<%= obj.operating_cost ? (obj.operating_cost/100).toFixed(2) : '' %>" required="required" pattern="decimal" data-validate-length-range="1,6">
+                    </td>
+                    <td class="tc cell-10 field item">
+                        <input data-input_type="3" type="text" class="form-control form-control-sm price-cost" value="<%= obj.fxh_cost ? (obj.fxh_cost/100).toFixed(2) : '' %>" required="required" pattern="decimal" data-validate-length-range="1,10">
+                    </td>
+                    <td class="tc cell-10 field item">
+                        <input data-input_type="4" type="text" class="form-control form-control-sm price-settlement" value="<%= obj.settlement_price ? (obj.settlement_price/100).toFixed(2) : '' %>" required="required" pattern="decimal" data-validate-length-range="1,10">
+                    </td>
+                    <td class="tc cell-10 j-submit" rowspan="<%= item.item_sku_dto_list.length %>" data-item_id="<%= item.id %>"><a href="javascript:;">提交</a></td>
+                </tr>
+            <% }else{ %>
+                <tr class="list-<%= item.id %>" data-sku_id="<%= obj.id %>">
+                    <td class="cell-20">
+                    <% _.each(obj.sku_property_dto_list, function(o,n){ %>
+                        <% if( o.name && o.value ){ %>
+                        <span><%= o.name %>：</span>
+                        <span><%= o.value %></span>；
+                        <% }else{ %>
+                        -
+                        <% } %>
+                    <% }) %>
+                    </td>
+                    <td class="tc">
+                        <% if( obj.bar_code ){ %>
+                        <span><%= obj.bar_code %></span>
+                        <% }else{ %>
+                        -
+                        <% } %>
+                    </td>
+                    <td class="tc cell-10 field item">
+                        <input data-input_type="1" type="text" class="form-control form-control-sm price-so" value="<%= obj.supplier_cost ? (obj.supplier_cost/100).toFixed(2) : '' %>" required="required" pattern="decimal" data-validate-length-range="1,10">
+                    </td>
+                    <td class="tc cell-10 field item">
+                        <input data-input_type="2" type="text" class="form-control form-control-sm price-ocr" value="<%= obj.operating_cost ? (obj.operating_cost/100).toFixed(2) : '' %>" required="required" pattern="decimal" data-validate-length-range="1,6">
+                    </td>
+                    <td class="tc cell-10 field item">
+                        <input data-input_type="3" type="text" class="form-control form-control-sm price-cost" value="<%= obj.fxh_cost ? (obj.fxh_cost/100).toFixed(2) : '' %>" required="required" pattern="decimal" data-validate-length-range="1,10">
+                    </td>
+                    <td class="tc cell-10 field item">
+                        <input data-input_type="4" type="text" class="form-control form-control-sm price-settlement" value="<%= obj.settlement_price ? (obj.settlement_price/100).toFixed(2) : '' %>" required="required" pattern="decimal" data-validate-length-range="1,10">
+                    </td>
+                </tr>
+            <% } %>
+        <% }) %>
+        <% }else{ %>
+    
+        <% } %>
+    <% }) %>
+</script>
+
+<!-- 品牌 -->
+<script type="text/template" id="j-template-brand">
+    <option value="">请选择品牌</option>
+    <% _.each(items,function(item,index){ %>
+    <option value="<%= item.id %>"><%= item.brand_name %></option>
+    <% }) %>
+</script>
+
+<!-- 品类 -->
+<script type="text/template" id="j-template-category">
+    <% if(type == 1){ %>
+    <option value="">请选择品类</option>
+    <% }else{ %>
+    <option value="">请选择二级品类</option>
+    <% } %>
+    <% _.each(items,function(item,index){ %>
+    <option value="<%= item.id %>" data-cate_level="<%= item.cate_level %>" data-parent_id="<%= item.parent_id %>" data-sub_cate="<%= encodeURIComponent(JSON.stringify(item.sub_categorys)) %>"><%= item.cate_name %></option>
+    <% }) %>
+</script>
+
+<!-- 商品成本价 -->
+<script type="text/template" id="j-template-sku">
+    <div class="table-responsive" id="skuList">
+    </div>
+</script>
+
+<!-- 商品成本价 - table -->
+<script type="text/template" id="j-template-sku-table">
+    <table class="table table-bordered">
+        <thead>
+        <tr class="headings">
+            <th class="column-title tc cell-20">商品名称</th>
+            <th class="column-title tc cell-60" colspan="<%= 2*(items[0].prop.length) %>">规格</th>
+            <th class="column-title tc cell-20">成本价</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% _.each(items,function(item,index){ %>
+        <% if( index == 0 ){ %>
+        <tr>
+            <td class="tc" rowspan="<%= items.length %>"><%= name %></td>
+            <% _.each(item.prop,function(n,i){ %>
+            <td rowspan="<%= items.length %>">
+                <span><%= n.prop_name || '-' %></span>
+            </td>
+            <td>
+                <span><%= n.value_name || '-' %></span>
+            </td>
+            <% }) %>
+            <td>
+                <input class="form-control form-control-md">
+            </td>
+        </tr>
+        <% }else{ %>
+        <tr>
+            <% _.each(item.prop,function(n,i){ %>
+            <td>
+                <span><%= n.value_name || '-' %></span>
+            </td>
+            <% }) %>
+            <td>
+                <input class="form-control form-control-md">
+            </td>
+        </tr>
+        <% } %>
+        <% }) %>
+        </tbody>
+    </table>
+</script>
+
+</body>
+</html>

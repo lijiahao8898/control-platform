@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+
+    <!-- 内容部分 -->
+    <div class="right_col" role="main">
+
+        <!-- 搜索 -->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>搜索框</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="form-inline fr">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <!--<input type="text" placeholder="请输入仓库ID" class="form-control form-control-lg mr10" id="storageId">-->
+                            <!--<input type="text" placeholder="请输入仓库简称" class="form-control form-control-lg mr10" id="storageShortName">-->
+                            <input type="text" placeholder="请输入仓库ID、简称或联系方式" class="form-control form-control-lg" id="keywords">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-success" id="search">搜索</button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        <!-- 姓名角色-->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>仓库列表</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <!-- 关联-->
+                <div class="form-group ">
+                    <a class="btn btn-sm btn-success" href="warehouse-add.html">添加</a>
+                </div>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped jambo_table bulk_action table-bordered">
+                        <thead>
+                        <tr class="headings">
+                            <th class="tc cell-5">
+                                <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="cell-5 tc">仓库ID</th>
+                            <th class="cell-10 tc">仓库简称</th>
+                            <th class="cell-10 tc">仓库全名</th>
+                            <th class="cell-10 tc">联系人</th>
+                            <th class="cell-10 tc">联系方式</th>
+                            <th class="cell-25">地址</th>
+                            <th class="cell-10 tc">状态</th>
+                            <th class="cell-15 no-link last tc"><span class="nobr">操作</span>
+                            </th>
+                            <th class="bulk-actions tc" colspan="7">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="warehouseList">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 页码 -->
+                <div class="widget-list clearfix ">
+                    <div class="fl pagination">
+                        <button class="btn btn-sm btn-success" id="batchDelete" >删除</button>
+                        <button class="btn btn-sm btn-success" id="batchunFreeze" >激活</button>
+                        <button class="btn btn-sm btn-success" id="batchFreeze" >关闭</button>
+                    </div>
+                    <div class="list-page fr">
+                        <span class="pagination-info"></span>
+                        <div class="ui-pagination pagination"></div>
+                    </div>
+                </div>
+                <!-- /页码 -->
+            </div>
+        </div>
+    </div>
+    <!-- page content -->
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+
+<!-- rev-hash -->
+<script src="../src/fn/warehouse.js"></script>
+<!-- end -->
+
+<script type="text/template" id="j-template-warehouse">
+<% _.each(items, function(item, index){ %>
+    <tr class="list">
+        <td class="tc">
+            <input type="checkbox" class="flat checkbox" data-id="<%= item.id %>">
+        </td>
+        <td class="tc"><%= item.id %></td>
+        <td class="tc"><%= item.storage_short_name %></td>
+        <td class="tc"><%= item.storage_name %></td>
+        <td class="tc"><%= item.link_man %></td>
+        <td class="tc"><%= item.mobile %></td>
+        <td>
+            <%= item.address_country ? (item.address_country).split('|')[0] : '' %>
+            <%= item.address_province ? (item.address_province).split('|')[0] : '' %>
+            <%= item.address_city ? (item.address_city).split('|')[0] : '' %>
+            <%= item.address_district ? (item.address_district).split('|')[0] : '' %>
+            <%= item.address_street %></td>
+        <td class="tc"><%= ['-','激活','关闭'][item.status] %></td>
+        <td class="tc">
+            <a href="warehouse-add.html?id=<%= item.id %>">编辑</a>
+            <span>-</span>
+            <a href="javascript:;" class="j-warehouse-delete" data-id="<%= item.id %>" data-name="<%= item.storage_name %>">删除</a>
+            <span>-</span>
+            <% if( item.status == 2 ){ %>
+            <a href="javascript:;" class="j-warehouse-freeze" data-id="<%= item.id %>" data-name="<%= item.storage_name %>" data-status="1">激活</a>
+            <% }else{ %>
+            <a href="javascript:;" class="j-warehouse-freeze" data-id="<%= item.id %>" data-name="<%= item.storage_name %>" data-status="2">关闭</a>
+            <% } %>
+        </td>
+    </tr>
+<% }) %>
+</script>
+</html>

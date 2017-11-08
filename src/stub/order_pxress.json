@@ -1,0 +1,291 @@
+{
+  "code": 10000,
+  "msg": "请求处理成功",
+  "data": [
+    {
+      "id": 1279,
+      "delivery_info_uid": "93806_1279",
+      "express_no": "9760812925122",
+      "user_id": 93806,
+      "order_id": 9994,
+      "express": "EMS",
+      "thirdparty_list": [
+        {
+          "time": "2017-03-15 17:04:38",
+          "context": "杭州市,投递并签收，签收人：他人收 望月天天代"
+        },
+        {
+          "time": "2017-03-15 14:46:49",
+          "context": "杭州市,  杭州市邮政速递物流公司高新区分公司三墩揽投站安排投递，预计23:59:00前投递（投递员姓名：邓乐;联系电话：15355493853）"
+        },
+        {
+          "time": "2017-03-15 11:50:35",
+          "context": "杭州市,离开杭州处理中心 发往杭州市邮政速递物流公司高新区分公司三墩揽投站"
+        },
+        {
+          "time": "2017-03-15 10:35:00",
+          "context": "杭州市,到达  杭州陆运转运中心 处理中心"
+        },
+        {
+          "time": "2017-03-15 06:32:00",
+          "context": "上海市,离开上海市 发往杭州市"
+        },
+        {
+          "time": "2017-03-14 22:40:16",
+          "context": "上海市,到达  上海处理中心 处理中心"
+        },
+        {
+          "time": "2017-03-14 19:17:52",
+          "context": "上海市,世博源(本部）已收件（揽投员姓名：丁华,联系电话:15618180729）"
+        }
+      ],
+      "express_code": "ems",
+      "order_item_list": [
+        {
+          "id": 12067,
+          "biz_code": "mockuai_demo",
+          "user_id": 93806,
+          "user_name": "yangxin",
+          "order_id": 9994,
+          "item_id": 164144,
+          "item_name": "正常商品",
+          "item_image_url": "http://img.mockuai.com/images/20170104/19/20170104192455828.jpg",
+          "item_sku_id": 66859,
+          "item_sku_desc": "",
+          "seller_id": 38699,
+          "unit_price": 1,
+          "number": 1,
+          "category_id": 3075,
+          "item_type": 1,
+          "refund_amount": 0,
+          "payment_amount": 0,
+          "discount_amount": 0,
+          "point": 0,
+          "point_amount": 0,
+          "delivery_mark": 1,
+          "delivery_info_id": 1279,
+          "original_sku_id": 66943,
+          "delivery_print_mark": 0
+        },
+        {
+          "id": 12068,
+          "biz_code": "mockuai_demo",
+          "user_id": 93806,
+          "user_name": "yangxin",
+          "order_id": 9994,
+          "item_id": 164005,
+          "item_name": "拼团3",
+          "item_image_url": "http://img.mockuai.com/images/20161025/11/20161025114849807.jpg",
+          "item_sku_id": 66690,
+          "item_sku_desc": "下午",
+          "seller_id": 38699,
+          "unit_price": 600,
+          "number": 1,
+          "category_id": 3075,
+          "item_brand_id": 4334,
+          "item_type": 1,
+          "refund_amount": 0,
+          "payment_amount": 0,
+          "discount_amount": 0,
+          "point": 0,
+          "point_amount": 0,
+          "delivery_mark": 1,
+          "delivery_info_id": 1279,
+          "original_sku_id": 66943,
+          "delivery_print_mark": 0
+        }
+      ],
+      "editable": 1
+    },
+    {
+      "id": 1279,
+      "delivery_info_uid": "93806_1279",
+      "express_no": "9760812925122",
+      "user_id": 93806,
+      "order_id": 9994,
+      "express": "EMS",
+      "thirdparty_list": [
+        {
+          "time": "2017-03-15 17:04:38",
+          "context": "杭州市,投递并签收，签收人：他人收 望月天天代"
+        },
+        {
+          "time": "2017-03-15 14:46:49",
+          "context": "杭州市,  杭州市邮政速递物流公司高新区分公司三墩揽投站安排投递，预计23:59:00前投递（投递员姓名：邓乐;联系电话：15355493853）"
+        },
+        {
+          "time": "2017-03-15 11:50:35",
+          "context": "杭州市,离开杭州处理中心 发往杭州市邮政速递物流公司高新区分公司三墩揽投站"
+        },
+        {
+          "time": "2017-03-15 10:35:00",
+          "context": "杭州市,到达  杭州陆运转运中心 处理中心"
+        },
+        {
+          "time": "2017-03-15 06:32:00",
+          "context": "上海市,离开上海市 发往杭州市"
+        },
+        {
+          "time": "2017-03-14 22:40:16",
+          "context": "上海市,到达  上海处理中心 处理中心"
+        },
+        {
+          "time": "2017-03-14 19:17:52",
+          "context": "上海市,世博源(本部）已收件（揽投员姓名：丁华,联系电话:15618180729）"
+        }
+      ],
+      "express_code": "ems",
+      "order_item_list": [
+        {
+          "id": 12067,
+          "biz_code": "mockuai_demo",
+          "user_id": 93806,
+          "user_name": "yangxin",
+          "order_id": 9994,
+          "item_id": 164144,
+          "item_name": "正常商品",
+          "item_image_url": "http://img.mockuai.com/images/20170104/19/20170104192455828.jpg",
+          "item_sku_id": 66859,
+          "item_sku_desc": "",
+          "seller_id": 38699,
+          "unit_price": 1,
+          "number": 1,
+          "category_id": 3075,
+          "item_type": 1,
+          "refund_amount": 0,
+          "payment_amount": 0,
+          "discount_amount": 0,
+          "point": 0,
+          "point_amount": 0,
+          "delivery_mark": 1,
+          "delivery_info_id": 1279,
+          "original_sku_id": 66943,
+          "delivery_print_mark": 0
+        },
+        {
+          "id": 12068,
+          "biz_code": "mockuai_demo",
+          "user_id": 93806,
+          "user_name": "yangxin",
+          "order_id": 9994,
+          "item_id": 164005,
+          "item_name": "拼团3",
+          "item_image_url": "http://img.mockuai.com/images/20161025/11/20161025114849807.jpg",
+          "item_sku_id": 66690,
+          "item_sku_desc": "下午",
+          "seller_id": 38699,
+          "unit_price": 600,
+          "number": 1,
+          "category_id": 3075,
+          "item_brand_id": 4334,
+          "item_type": 1,
+          "refund_amount": 0,
+          "payment_amount": 0,
+          "discount_amount": 0,
+          "point": 0,
+          "point_amount": 0,
+          "delivery_mark": 1,
+          "delivery_info_id": 1279,
+          "original_sku_id": 66943,
+          "delivery_print_mark": 0
+        }
+      ],
+      "editable": 1
+    },
+    {
+      "id": 1279,
+      "delivery_info_uid": "93806_1279",
+      "express_no": "9760812925122",
+      "user_id": 93806,
+      "order_id": 9994,
+      "express": "EMS",
+      "thirdparty_list": [
+        {
+          "time": "2017-03-15 17:04:38",
+          "context": "杭州市,投递并签收，签收人：他人收 望月天天代"
+        },
+        {
+          "time": "2017-03-15 14:46:49",
+          "context": "杭州市,  杭州市邮政速递物流公司高新区分公司三墩揽投站安排投递，预计23:59:00前投递（投递员姓名：邓乐;联系电话：15355493853）"
+        },
+        {
+          "time": "2017-03-15 11:50:35",
+          "context": "杭州市,离开杭州处理中心 发往杭州市邮政速递物流公司高新区分公司三墩揽投站"
+        },
+        {
+          "time": "2017-03-15 10:35:00",
+          "context": "杭州市,到达  杭州陆运转运中心 处理中心"
+        },
+        {
+          "time": "2017-03-15 06:32:00",
+          "context": "上海市,离开上海市 发往杭州市"
+        },
+        {
+          "time": "2017-03-14 22:40:16",
+          "context": "上海市,到达  上海处理中心 处理中心"
+        },
+        {
+          "time": "2017-03-14 19:17:52",
+          "context": "上海市,世博源(本部）已收件（揽投员姓名：丁华,联系电话:15618180729）"
+        }
+      ],
+      "express_code": "ems",
+      "order_item_list": [
+        {
+          "id": 12067,
+          "biz_code": "mockuai_demo",
+          "user_id": 93806,
+          "user_name": "yangxin",
+          "order_id": 9994,
+          "item_id": 164144,
+          "item_name": "正常商品",
+          "item_image_url": "http://img.mockuai.com/images/20170104/19/20170104192455828.jpg",
+          "item_sku_id": 66859,
+          "item_sku_desc": "",
+          "seller_id": 38699,
+          "unit_price": 1,
+          "number": 1,
+          "category_id": 3075,
+          "item_type": 1,
+          "refund_amount": 0,
+          "payment_amount": 0,
+          "discount_amount": 0,
+          "point": 0,
+          "point_amount": 0,
+          "delivery_mark": 1,
+          "delivery_info_id": 1279,
+          "original_sku_id": 66943,
+          "delivery_print_mark": 0
+        },
+        {
+          "id": 12068,
+          "biz_code": "mockuai_demo",
+          "user_id": 93806,
+          "user_name": "yangxin",
+          "order_id": 9994,
+          "item_id": 164005,
+          "item_name": "拼团3",
+          "item_image_url": "http://img.mockuai.com/images/20161025/11/20161025114849807.jpg",
+          "item_sku_id": 66690,
+          "item_sku_desc": "下午",
+          "seller_id": 38699,
+          "unit_price": 600,
+          "number": 1,
+          "category_id": 3075,
+          "item_brand_id": 4334,
+          "item_type": 1,
+          "refund_amount": 0,
+          "payment_amount": 0,
+          "discount_amount": 0,
+          "point": 0,
+          "point_amount": 0,
+          "delivery_mark": 1,
+          "delivery_info_id": 1279,
+          "original_sku_id": 66943,
+          "delivery_print_mark": 0
+        }
+      ],
+      "editable": 1
+    }
+  ]
+}

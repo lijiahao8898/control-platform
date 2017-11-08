@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/goods_management.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+
+    <!-- 内容部分 -->
+    <div class="right_col" role="main">
+
+        <!-- 搜索 -->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>搜索框</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-md-4 col-sm-12 col-xs-12 form-group pull-right">
+                    <div class="input-group">
+                        <input type="text" placeholder="请输入HS编码 / 行邮税号" class="form-control form-control-lg pull-right" id="keywords">
+                        <span class="input-group-btn">
+                              <button type="button" class="btn btn-sm btn-success pull-right" id="j-search">搜索</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>税率模板列表</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <!-- 关联-->
+                <div class="form-group ">
+                    <a class="btn btn-sm btn-success " href="goods-tax-template-add.html">添加</a>
+                    <a class="btn btn-sm btn-success " href="javascript:;">导入</a>
+                    <a class="btn btn-sm btn-success " href="javascript:;">导出</a>
+                </div>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped jambo_table bulk_action table-bordered">
+                        <thead>
+                        <tr class="headings">
+                            <th class="tc">
+                                <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title tc">模板名称 </th>
+                            <th class="column-title tc">税率(%)</th>
+                            <th class="column-title tc">起征点(元)</th>
+                            <th class="column-title tc">行邮税号</th>
+                            <th class="column-title tc">HS编码</th>
+                            <th class="column-title no-link last tc"><span class="nobr">操作</span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="taxList">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 页码 -->
+                <div class="ui-box">
+                    <div class="widget-list">
+                        <div class="fl pagination">
+                            <button class="btn btn-sm btn-success" id="batchDelete" >删除</button>
+                        </div>
+                        <div class="list-page fr">
+                            <span class="pagination-info"></span>
+                            <div class="ui-pagination pagination"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /页码 -->
+            </div>
+        </div>
+
+    </div>
+    <!-- page content -->
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- rev-hash -->
+<script src="../src/fn/goods-tax-template.js"></script>
+<!-- end -->
+
+<script type="text/template" id="j-template">
+    <% _.each(items, function(item, index){ %>
+        <tr class="list">
+            <td class="tc a-center">
+                <input type="checkbox" class="checkbox flat" data-id="<%= item.id %>">
+            </td>
+            <td class="tc"><%= item.tax_template_name %></td>
+            <td class="tc"><%= item.rate %></td>
+            <td class="tc"><%= item.threshold %></td>
+            <td class="tc"><%= item.postal_number %></td>
+            <td class="tc"><%= item.hs_code %></td>
+            <td class="tc">
+                <a href="goods-tax-template-add.html?id=<%= item.id %>">编辑</a>
+                <span>-</span>
+                <a href="javascript:;" class="j-tax-delete" data-id="<%= item.id %>" data-name="<%= item.tax_template_name %>">删除</a>
+            </td>
+        </tr>
+    <% }) %>
+</script>
+</html>

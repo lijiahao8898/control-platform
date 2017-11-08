@@ -1,0 +1,187 @@
+@import "_mixin.scss";
+
+#orderList, #orderInfo, #changePriceInfo, #checkOrderInfo, #orderRefund {
+  .order-header, .price-header {
+    background: #f8f8f8;
+    box-shadow: 1px 1px 5px #ccc;
+    th {
+        border-right: none;
+        border-left: none;
+    }
+  }
+  .fa {
+    font-size: 16px;
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+    &.fa-star {
+      color: #1ABB9C;
+    }
+  }
+  dl {
+    clear: both;
+    dt {
+      float: left;
+      padding: 2px;
+      margin: 0 10px;
+      @include border-image();
+      .order-image {
+        width: 64px;
+        height: 64px;
+      }
+    }
+    dd {
+      float: left;
+      p {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      p.sku {
+        font-size: 12px;
+        color: #ccc;
+      }
+    }
+  }
+}
+
+#orderInfo {
+  max-height: 550px;
+  overflow: scroll;
+}
+
+/**** 订单详情 ***/
+
+#order, #orderRefund {
+  padding: 20px;
+  // /* border: 1px solid #ccc; */
+  // background: #f8f8f8;
+  border-radius: 4px;
+  margin-top: 50px;
+}
+
+#orderLogistic {
+  overflow: hidden;
+  .tab-pane {
+    padding: 20px;
+    .parcel-info {
+      padding: 0 0 20px 0;
+      border-bottom: 1px solid #73879C;
+    //   border-top: 1px solid #73879C;
+    }
+  }
+  .thirdparty-list:nth-child(3) {
+    color: #26B99A;
+    .cycle {
+      background: #26B99A;
+      border: #26B99A;
+    }
+    .logistic-time {
+      border-bottom: 1px dashed #26B99A !important;
+    }
+  }
+  .thirdparty-list {
+    color: #ccc;
+    position: relative;
+    .cycle {
+      border-radius: 100%;
+      border: 1px solid #ccc;
+      width: 8px;
+      height: 8px;
+      background: #ccc;
+      display: inline-block;
+      margin-right: 10px;
+      position: absolute;
+      top: 40px;
+    }
+    .logistic-content {
+      margin-left: 20px;
+      margin-top: 20px;
+      width: 600px;
+      display: inline-block;
+      .logistic-time {
+        padding-bottom: 5px;
+        border-bottom: 1px dashed #999
+      }
+      .logistic-detail {
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+/**** 维权详情 ***/
+
+#orderRefund {
+  .item-goods {
+    display: inline-block;
+    width: 150px;
+  }
+}
+.box-block {
+    border: 1px solid #ddd;
+    // border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px
+}
+#orderRefundList {
+  .refund-list:nth-child(1) {
+    color: #26B99A;
+    .cycle {
+      background: #26B99A;
+      border: #26B99A;
+    }
+    .refund-time {
+      border-bottom: 1px dashed #26B99A !important;
+    }
+  }
+  .refund-list {
+    color: #ccc;
+    position: relative;
+    .cycle {
+      border-radius: 100%;
+      border: 1px solid #ccc;
+      width: 8px;
+      height: 8px;
+      background: #ccc;
+      display: inline-block;
+      margin-right: 10px;
+      position: absolute;
+      top: 40px;
+      left: 0px;
+    }
+    .refund-content {
+      margin-left: 20px;
+      margin-top: 20px;
+      width: 100%;
+      padding-right: 40px;
+      display: inline-block;
+      .refund-time {
+        padding-bottom: 5px;
+        border-bottom: 1px dashed #999
+      }
+      .refund-detail {
+        margin-top: 5px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+.partdeliver {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    border: 1px solid #1ABB9C;
+}
+
+// 弹出框页面＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+.pagination-pop, .pagination-pop-select, .pagination-pop-warehouse {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+// 弹出框页面＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊

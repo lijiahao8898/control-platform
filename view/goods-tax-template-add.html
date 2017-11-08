@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>添加账户</title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/goods_management.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body" style="position: relative">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="x_panel">
+            <div class="x_title">
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content editorContent">
+                <div class="form-inline edit-wrapper">
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>模板名称：</label>
+                        <input class="form-control form-control-hg" required="required" pattern="normal" data-name="模板名称" id="tax_template_name" type="text" placeholder="请输入模板名称">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>起征点（元）：</label>
+                        <input class="form-control form-control-hg" type="text" disabled="disabled" value="0.00"> </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>税率（%）：</label>
+                        <input class="form-control form-control-hg" required="required" pattern="decimal" data-name="税率" id="rate" type="text" placeholder="请输入税率">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr">HS编码：</label>
+                        <input class="form-control form-control-hg" pattern="alphanumeric" data-name="HS编码" id="hs_code" type="text" placeholder="请输入编码">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr">行邮税号：</label>
+                        <input class="form-control form-control-hg" pattern="alphanumeric" data-name="行邮税号" id="postal_number" type="text" placeholder="请输入税号">
+                    </div>
+                </div>
+                <div class="footer-btn-group">
+                    <a class="btn btn-success btn-sm mr10" id="j-submit">保存</a>
+                    <a class="btn btn-default btn-sm ml10" id="j-cancel">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+
+<!-- rev-hash -->
+<script src="../src/fn/goods-tax-template-add.js"></script>
+<!-- end -->
+</html>

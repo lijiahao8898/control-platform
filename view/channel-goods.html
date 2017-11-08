@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+    <!-- rev-hash -->
+    <link href="../style/css/channel.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+
+    <!-- 内容部分 -->
+    <div class="right_col" role="main">
+
+        <!-- 搜索 -->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>搜索框</small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="form-inline fr">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" placeholder="请输入渠道商名称" class="form-control form-control-lg" id="keywords">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-success" id="search">搜索</button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>渠道列表</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <!-- 关联-->
+                <div class="form-group">
+                    <a class="btn btn-sm btn-success mr10" href="javascript:;" id="export">导出</a>
+                    <a class="btn btn-sm btn-success mr10" href="javascript:;" id="exportList">查看导出列表</a>
+                    <a class="btn btn-sm btn-success " href="javascript:;" id="channelList">查看关联列表</a>
+                </div>
+                <div id="renderChannel" class="mt10 mb10 channel-name-lists"></div>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped jambo_table bulk_action table-bordered">
+                        <thead>
+                        <tr class="headings">
+                            <th class="tc">
+                                <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title tc">渠道商ID</th>
+                            <th class="column-title tc">渠道商名称</th>
+                            <th class="column-title tc">店铺数</th>
+                            <th class="column-title tc">分享合伙人数</th>
+                            <th class="column-title tc">订单数</th>
+                            <th class="column-title tc">spu数</th>
+                            <th class="column-title tc">sku数</th>
+                            <th class="column-title tc">渠道商状态</th>
+                            <th class="column-title tc no-link last"><span class="nobr">操作</span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="channel">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 页码 -->
+                <div class="widget-list clearfix">
+                    <div class="fl pagination">
+                        <a class="btn btn-sm btn-success" id="batchSelect" href="javascript:;" target="_blank">批量关联</a>
+                    </div>
+                    <div class="list-page fr">
+                        <span class="pagination-info"></span>
+                        <div class="ui-pagination pagination p-1"></div>
+                    </div>
+                </div>
+                <!-- /页码 -->
+            </div>
+        </div>
+    </div>
+    <!-- page content -->
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+
+<!-- rev-hash -->
+<script src="../src/fn/channel-goods.js"></script>
+<!-- end -->
+
+<script type="text/template" id="j-export-list">
+    <div class="export-dialog-wrapper">
+        <table class="table table-striped jambo_table bulk_action table-bordered">
+            <thead>
+            <tr>
+                <th class="tc">时间</th>
+                <th class="tc">状态</th>
+                <th class="tc">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if( items.length > 0 ){ %>
+            <% _.each(items, function(item, index){ %>
+            <tr>
+                <td class="tc"><%= item.create_time %></td>
+                <td class="tc"><%= ['-','新建任务','导出中','导出成功','导出失败','失效'][item.task_status] %></td>
+                <td class="tc">
+                    <% if( item.task_status != 3 ){ %>
+                    <span>-</span>
+                    <% }else{ %>
+                    <a href="<%= url %>/export/download.do?oss_bucket_name=<%= item.oss_bucket_name %>&oss_object_key=<%= item.oss_object_key %>" target="_blank">下载</a>
+                    <% } %>
+                </td>
+            </tr>
+            <% }) %>
+            <% }else{ %>
+            <tr>
+                <td class="tc" colspan="18">没有任何记录!</td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+    <!-- 页码 -->
+    <div class="widget-list clearfix">
+        <div class="fl pagination">
+        </div>
+        <div class="list-page fr">
+            <span class="pagination-info"></span>
+            <div class="ui-pagination pagination p-3"></div>
+        </div>
+    </div>
+    <!-- /页码 -->
+</script>
+
+<script type="text/template" id="j-channel-list">
+    <div class="channel-dialog-wrapper">
+        <table class="table table-striped jambo_table bulk_action table-bordered">
+            <thead>
+            <tr>
+                <th class="tc">渠道</th>
+                <th class="tc">关联范围</th>
+                <th class="tc">关联时间</th>
+                <th class="tc">完成时间</th>
+                <th class="tc">状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if( items.length > 0 ){ %>
+            <% _.each(items, function(item, index){ %>
+            <tr>
+                <td class="tc"><%= item.channel_name %></td>
+                <td class="tc"><%= ['-','全部','指定品牌','指定类目','指定商品'][item.type] %><%= item.target_name %></td>
+                <td class="tc"><%= item.start_time %></td>
+                <td class="tc"><%= item.end_time || '-' %></td>
+                <td class="tc"><%= ['-','进行中','成功','失败'][item.status] %></td>
+            </tr>
+            <% }) %>
+            <% }else{ %>
+            <tr>
+                <td class="tc" colspan="18">没有任何记录!</td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+    <!-- 页码 -->
+    <div class="widget-list clearfix">
+        <div class="fl pagination ">
+        </div>
+        <div class="list-page fr">
+            <span class="pagination-info"></span>
+            <div class="ui-pagination pagination p-2"></div>
+        </div>
+    </div>
+    <!-- /页码 -->
+</script>
+
+<script type="text/template" id="j-template-channel-list">
+    <% _.each(items, function(item,index){ %>
+    <div class="channel-detail">
+        <img class="channel-img" src="http://img.mockuai.com/tms/2017/3/20/upload_ed82c572beb295358c92c025eed00e1f.jpeg">
+        <span><%= item.name %></span>
+        <i class="fa fa-close img-close j-image-close" data-id="<%= item.id %>"></i>
+    </div>
+    <% }) %>
+</script>
+
+<script type="text/template" id="j-template">
+    <% _.each(items, function(item,index){ %>
+    <tr class="even pointer list">
+        <td class="a-center tc">
+            <input type="checkbox" class="flat checkbox" name="table_records" data-id="<%= item.id %>" data-name="<%= item.name %>" data-biz_code="<%= item.biz_code %>">
+        </td>
+        <td class="tc"><%= item.id %></td>
+        <td class="tc"><%= item.name %> </td>
+        <td class="tc">-</td>
+        <td class="tc">-</td>
+        <td class="tc">-</td>
+        <td class="tc">-</td>
+        <td class="tc">-</td>
+        <td class="tc"><%= ['激活','关闭'][item.channel_status] %></td>
+        <td class="last tc">
+            <a href="javascript:;" class="j-goods-channel" data-id="<%= item.id %>" data-name="<%= item.name %>" data-biz_code="<%= item.biz_code %>">商品管理</a>
+        </td>
+    </tr>
+    <% }) %>
+</script>
+</html>

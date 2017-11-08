@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/system.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+
+    <!-- 内容部分 -->
+    <div class="right_col" role="main" id="account">
+
+        <!-- 搜索 -->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>搜索框</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="form-inline tr">
+                    <div class="form-group">
+                        <select class="form-control form-control-md" id="status">
+                            <option value="null">请选择状态</option>
+                            <option value="1">正常</option>
+                            <option value="0">禁用</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="请输入姓名" class="form-control form-control-lg">
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" id="userName" placeholder="请输入账号" class="form-control form-control-lg">
+                        <span class="input-group-btn">
+                               <a href="javascript:;" class="btn btn-sm btn-success pull-right btn-search" id="j-search">搜索</a>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        <!-- 姓名角色-->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>账号列表</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <!-- 添加-->
+                <div class="form-group">
+                    <a class="btn btn-sm btn-success" href="system-account-add.html">添加</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action table-bordered">
+                        <thead>
+                        <tr class="headings">
+                            <!--<th>-->
+                                <!--<input type="checkbox" id="check-all" class="flat">-->
+                            <!--</th>-->
+                            <th class="column-title tc">姓名 </th>
+                            <th class="column-title tc">角色</th>
+                            <th class="column-title tc">账号</th>
+                            <th class="column-title tc">加入时间</th>
+                            <th class="column-title tc">最后登录时间</th>
+                            <th class="column-title tc">状态</th>
+                            <th class="column-title tc"><span>操作</span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="j-list"></tbody>
+                    </table>
+                </div>
+
+                <!-- 页码 -->
+                <div class="widget-list clearfix ">
+                    <!--<div class="fl pagination">-->
+                        <!--<button class="btn btn-sm btn-success" id="batchDelete">批量删除</button>-->
+                    <!--</div>-->
+                    <div class="list-page fr">
+                        <span class="pagination-info"></span>
+                        <div class="ui-pagination pagination"></div>
+                    </div>
+                </div>
+                <!-- /页码 -->
+            </div>
+        </div>
+    </div>
+        <!-- page content -->
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+
+<!-- rev-hash -->
+<script src="../src/fn/system-account.js"></script>
+<!-- end -->
+
+<script type="text/template" id="tpl">
+    <% _.each(data,function(item){ %>
+    <tr class="even pointer list">
+        <!--<td class="a-center ">-->
+            <!--<input type="checkbox" class="checkbox flat" data-id="<%= item.id %>" name="table_records">-->
+        <!--</td>-->
+        <td class="tc"><%= item.name %></td>
+        <td class="tc"><%= item.role_name || '-' %></td>
+        <td class="tc"><%= item.user_name %></td>
+        <td class="tc"><span><%= item.gmt_created %></span></td>
+        <td class="tc"><span><%= item.last_login || '-' %></span></td>
+        <td class="tc"><%= ['禁用','正常'][item.status] %></td>
+        <td class="tc">
+            <% if( item.is_super != 1 ){ %>
+                <% if( item.status == 0 ){ %>
+                    <span>
+                        <a href="javascript:;" data-id="<%= item.id %>" data-status="<%= item.status %>" data-name="<%= item.name %>" class="j-freeze">启用</a>
+                    </span>
+                    <span>-</span>
+                <% }else{ %>
+                    <span>
+                        <a style="color:red" href="javascript:;" data-id="<%= item.id %>" data-status="<%= item.status %>" data-name="<%= item.name %>"  class="j-freeze">禁用</a>
+                    </span>
+                    <span>-</span>
+                <% } %>
+            <% } %>
+            <span><a href="system-account-add.html?id=<%= item.id %>" data-id="<%= item.id %>">编辑</a></span>
+            <!--<span class="table-line">&nbsp;-&nbsp;</span>-->
+            <!--<span><a href="manager_daily.html?id=<%= item.id %>" target="_blank" data-id="<%= item.id %>" class="j-daily">日志</a></span>-->
+            <% if( item.is_super != 1 ){ %>
+            <span>-</span>
+            <span>
+                <a href="javascript:;" data-id="<%= item.id %>" data-name="<%= item.name %>" class="j-del">删除</a>
+            </span>
+            <% } %>
+        </td>
+    </tr>
+   <% }) %>
+</script>
+</html>

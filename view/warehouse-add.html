@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>添加账户</title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <link href="../style/css/system.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+    <div class="right_col" role="main" id="account">
+
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    <small></small>
+                </h2>
+            </div>
+            <div class="x_content editorContent">
+                <div class="form-inline edit-wrapper">
+                    <!--<div class="form-group field item mb10">-->
+                        <!--<label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>仓库ID：</label>-->
+                        <!--<input class="form-control form-control-410" id="storageId" required="required" data-name="仓库ID"-->
+                               <!--type="text" placeholder="请输入仓库ID" pattern="alphanumeric">-->
+                    <!--</div>-->
+                    <!--<br/>-->
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>仓库简称：</label>
+                        <input class="form-control form-control-410" id="storageShortName" required="required" pattern="normal" data-name="仓库简称"
+                               type="text" placeholder="请输入仓库简称">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>仓库全名：</label>
+                        <input class="form-control form-control-410" id="storageName" required="required" pattern="normal" data-name="仓库全名"
+                               type="text" placeholder="请输入仓库全名">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>供应商名称：</label>
+                        <input class="form-control form-control-410" id="supplierName" required="required" pattern="normal" data-name="供应商名称"
+                               type="text" placeholder="请输入供应商名称">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>联系人：</label>
+                        <input class="form-control form-control-410" id="linkMan" required="required" pattern="normal" data-name="联系人"
+                               type="text" placeholder="请输入联系人">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>联系电话：</label>
+                        <input class="form-control form-control-410" id="mobile" required="required" data-name="联系电话"
+                               type="text" maxlength="11" placeholder="请输入联系电话" pattern="alphanumeric">
+                    </div>
+                    <br/>
+                    <div class="form-group j-no-super field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>联系地址：</label>
+                        <select class="form-control form-control-sm" required="required" data-name="国家" id="areaList-country" data-nextName="province">
+                            <option>国家</option>
+                            <option data-value="中国" data-code="cn">中国</option>
+                            <option data-value="国外" data-code="en">国外</option>
+                        </select>
+                        <select class="form-control form-control-sm" required="required" data-name="省" id="areaList-province" data-nextName="city">
+                            <option>省</option>
+                        </select>
+
+                        <select class="form-control form-control-sm" required="required" data-name="市" id="areaList-city" data-nextName="area">
+                            <option>市</option>
+                        </select>
+
+                        <select class="form-control form-control-sm" required="required" data-name="区" id="areaList-area" data-nextName="">
+                            <option>区</option>
+                        </select>
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>详细地址：</label>
+                        <input class="form-control form-control-410" id="street" required="required" data-name="详细地址"
+                               type="text" placeholder="请输入详细地址">
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr"><span class="required-icon">*</span>仓库类型：</label>
+                        <select class="form-control form-control-410" id="storageType" required="required" data-name="仓库类型">
+                            <option data-value="">--请选择仓库类型--</option>
+                            <option data-value="1">保税仓</option>
+                            <option data-value="2">完税仓</option>
+                            <option data-value="3">海外自购仓</option>
+                            <option data-value="4">海外直邮仓</option>
+                        </select>
+                    </div>
+                    <br/>
+                    <div class="form-group field item mb10">
+                        <label class="ui-label ui-label-lg tr">仓库费用：</label>
+                        <div class="input-group">
+                            <input class="form-control form-control-370" required="required" data-name="仓库费用"
+                                   type="text" maxlength="18" placeholder="请输入仓库费用" disabled="disabled" value="0">
+                            <span class="input-group-addon">元</span>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                <div class="footer-btn-group">
+                    <a href="javascript:;" class="btn btn-success btn-sm mr10" id="j-submit">保存</a>
+                    <a href="javascript:;" class="btn btn-default btm-sm ml10" id="j-cancel">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /page content -->
+
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- rev-hash -->
+<script src="../src/fn/warehouse-add.js"></script>
+<!-- end -->
+
+<!-- warehouse area option -->
+<script type="text/template" id="j-template">
+    <option value="null"><%= parent_name %></option>
+    <% _.each(items,function(item,index){ %>
+    <option data-value="<%= item.name %>" data-region_level="<%= item.region_level %>" data-code="<%= item.code %>">
+        <%= item.name %>
+    </option>
+    <% }) %>
+</script>
+
+</html>

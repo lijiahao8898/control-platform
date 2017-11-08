@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title></title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!-- rev-hash -->
+    <!-- 自身使用的css -->
+    <!--<link href="../style/css/goods_management.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="../style/css/uploader.css" rel="stylesheet" type="text/css">-->
+    <!-- end -->
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+
+        <!-- page content -->
+        <div class="right_col dpnone" role="main" id="openShopHistory">
+
+            <!-- 搜索 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>搜索框</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-inline fr">
+                        <div class="form-group">
+                            <label class="ui-label ui-label-sm tr">选择渠道：</label>
+                            <select class="form-control form-control-md" v-model="searchValue.channel">
+                                <option value="">请选择所属渠道</option>
+                                <option v-for="item in channelList">
+                                    {{ item.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="ui-label ui-label-sm tr">选择状态：</label>
+                            <select class="form-control form-control-md" v-model="searchValue.status">
+                                <option value="">全部</option>
+                                <option>待结算</option>
+                                <option>已结算</option>
+                            </select>
+                        </div>
+                        <div class="form-group mr10">
+                            <label class="ui-label ui-label-sm tr pt5">时间段：</label>
+                            <div id="timepicker" class="pull-right timepicker">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                <span class="fz12">请选择相应的时间</span> <b class="caret"></b>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" placeholder="请输入用户ID,昵称或者联系方式" v-model="searchValue.name" class="form-control form-control-lg" id="keywords">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-success" id="search" v-on:click="searchInformation()">搜索</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 搜索end -->
+
+            <!-- 内容部分 -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small>开店记录列表</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-group">
+                        <a href="javascript:;" class="btn btn-sm btn-success" v-on:click="exportHistroy()">导出</a>
+                    </div>
+                    <!--<div>-->
+                        <!--<div class="form-group">-->
+                            <!--<a class="btn btn-sm btn-success" href="goods-brand-add.html">添加品牌</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action table-bordered">
+                            <thead>
+                            <tr class="headings">
+                                <th class="tc cell-5">
+                                    <input type="checkbox" id="check-all" class="flat">
+                                </th>
+                                <th class="tc column-title">用户ID</th>
+                                <th class="tc column-title cell-20">用户姓名</th>
+                                <th class="tc column-title cell-30">用户账号</th>
+                                <th class="tc column-title">店铺名称</th>
+                                <th class="tc column-title">所属渠道</th>
+                                <th class="tc column-title">
+                                    <span class="caret-top" v-if="recharge.asc"></span>
+                                    <span class="caret-bottom" v-if="recharge.desc"></span>
+                                    <a href="javascript:;" v-on:click="orderBy($event, recharge)" class="j-order-by green">充值时间</a>
+                                </th>
+                                <th class="tc column-title">
+                                    <span class="caret-top" v-if="expiration.asc"></span>
+                                    <span class="caret-bottom" v-if="expiration.desc"></span>
+                                    <a href="javascript:;" v-on:click="orderBy($event, expiration)" class="j-order-by green">到期时间</a>
+                                </th>
+                                <th class="tc column-title">充值时长（月）</th>
+                                <th class="tc column-title">状态</th>
+                                <th class="tc column-title">操作</th>
+                                <th class="tc column-title">结算金额</th>
+                            </tr>
+                            </thead>
+                            <tbody id="historyList">
+                            <tr v-if="dataList.length <= 0">
+                                <td class="tc" colspan="18">没有任何记录!</td>
+                            </tr>
+                            <tr v-if="dataList.length > 0" v-for="item in dataList" class="list">
+                                <td class="tc"><input type="checkbox" class="checkbox flat" :data-id="item.id"></td>
+                                <td class="tc">{{item.brand_desc || '-'}}</td>
+                                <td class="tc">{{item.brand_name || '-'}}</td>
+                                <td class="tc">{{item.brand_name || '-'}}</td>
+                                <td class="tc">{{item.brand_name || '-'}}</td>
+                                <td class="tc">{{item.brand_name || '-'}}</td>
+                                <td class="tc">{{item.brand_name || '-'}}</td>
+                                <td class="tc">{{item.brand_name || '-'}}</td>
+                                <td class="tc">{{item.brand_name || '-'}}</td>
+                                <td class="tc">{{item.status == 1 ? '激活' : '关闭'}}</td>
+                                <td class="tc"><a href="javascript:;" v-on:click="settlementFunc($event,item)" :data-id="item.id">{{item.status == 1 ? '关闭' : '激活'}}</a></td>
+                                <td class="tc">{{item.brand_name || '-'}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 页码 -->
+                    <div class="widget-list clearfix ">
+                        <div class="fl pagination">
+                            <button class="btn btn-sm btn-success" id="batchSettlement" v-on:click="batchSettlementFunc($event)">批量结算</button>
+                        </div>
+                        <div class="list-page fr">
+                            <span class="pagination-info"></span>
+                            <div class="ui-pagination pagination"></div>
+                        </div>
+                    </div>
+                    <!-- /页码 -->
+
+                </div>
+            </div>
+            <!-- 内容部分 -->
+        </div>
+        <!-- /page content -->
+
+        @@include('common/footer.html')
+
+    </div>
+</div>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+ <!--rev-hash -->
+ <!--自身使用的js -->
+<script type="text/javascript" src="../src/plugin/vue/vue.js"></script>
+<script type="text/javascript" src="../src/fn/market-open-shop-history.js"></script>
+ <!--end -->
+
+</body>
+</html>

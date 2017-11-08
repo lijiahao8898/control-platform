@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+    <!-- rev-hash -->
+    <link href="../style/css/goods_management.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+    </div>
+    <!-- page content -->
+
+    <!-- 内容部分 -->
+    <div class="right_col" role="main" id="freightTemplate">
+        <div class="content">
+            <div class="x_panel editorContent">
+                <div class="x_title"></div>
+                <div class="x_content">
+                    <div class="tpl-content">
+                        <!-- 运费模板内容开始 -->
+                            <div class="form-inline">
+                                <div class="form-group field item">
+                                    <label class="ui-label ui-label-md tr"><span class="required-icon">*</span>模板名称：</label>
+                                    <input type="text" class="form-control form-control-hg" id="name" required="required" pattern="normal" name="模板名称" placeholder="请输入模板名称">
+                                </div>
+                                <br/>
+                                <div class="form-group mb10 mt10">
+                                    <label class="ui-label ui-label-md tr"><span class="required-icon">*</span>计价方式：</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <input type="radio" name="radio" data-value="0" class="flat">
+                                        &nbsp;按件数
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="ml5">
+                                        <input type="radio" name="radio" data-value="1" class="flat" checked="checked">
+                                        &nbsp;按重量
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="ml5">
+                                        <input type="radio" name="radio" data-value="2" class="flat">
+                                        &nbsp;按体积
+                                    </label>
+                                </div>
+                                <br/>
+                                <div class="form-group">
+                                    <label class="ui-label ui-label-md tr"><span class="required-icon">*</span>配送区域：</label> <span>除指定地区外，其余地区的运费采用”默认运费“</span>
+                                </div>
+                            </div>
+                            <div class="template-set mb-15 ">
+                                <div class="form-inline">
+                                    <div class="form-group default-shipping">
+                                        <label><span class="required-icon">*</span>默认运费：</label>
+                                        <div class="field item inline">
+                                            <input class="form-control form-control-sm basic_count" type="text" required="required" name="数据" pattern="decimalOne">
+                                        </div>
+                                        <span class="unit">kg</span><span>内，</span>
+                                        <div class="field item inline">
+                                            <input class="form-control form-control-sm basic_charge" type="text" required="required" name="数据" pattern="decimal">
+                                        </div>
+                                        <span>元，每增加</span>
+                                        <div class="field item inline">
+                                            <input class="form-control form-control-sm extra_count" type="text" required="required" name="数据" pattern="decimalOne">
+                                        </div>
+                                        <span class="unit">kg</span><span>，增加运费</span>
+                                        <div class="field item inline">
+                                            <input class="form-control form-control-sm extra_charge" type="text" required="required" name="数据" pattern="decimal">
+                                        </div>
+                                        <span>元</span> </div>
+                                </div>
+                                <table class="table table-striped jambo_table bulk_action table-bordered mt10">
+                                    <thead>
+                                    <tr>
+                                        <th class="border-r">运送到</th>
+                                        <th class="border-r">首<span class="unit-che">重</span>（<span class="unit">kg</span>）</th>
+                                        <th class="border-r">首费（元）</th>
+                                        <th class="border-r">续<span class="unit-che">重</span>（<span class="unit">kg</span>）</th>
+                                        <th class="border-r">续费（元）</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="template-list"></tbody>
+                                </table>
+                                <div class="the-batch">
+                                    <input type="checkbox" class="check-all"> <span>全选</span>
+                                    <a id="batch-setting">批量设置</a>
+                                    <a id="batch-del">批量删除</a>
+                                </div>
+                                <div>
+                                    <a id="j-add-area" class="mr10" href="javascript:;">为指定地区城市设置运费</a>
+                                    <a id="batch-ope" href="javascript:;">批量操作</a>
+                                </div>
+                            </div>
+                        <!-- 运费模板内容结束 -->
+                    </div>
+                </div>
+                <div class="footer-btn-group">
+                    <a class="btn btn-success btn-sm mr10" id="j-submit">保存</a>
+                    <a class="btn btn-default btn-sm ml10" id="j-cancel">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="modal-backdrop fade in" style="display: none"></div>-->
+    <!-- page content -->
+    @@include('common/footer.html')
+
+</div>
+</body>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- rev-hash -->
+<script src="../src/fn/goods-freight-template-new.js"></script>
+<!-- end -->
+
+<!-- 批量设置 -->
+<script type="text/template" id="batchSetup">
+    <div class="form-inline">
+        <div class="form-group batch-input">
+            <label>默认运费：</label>
+            <input class="form-control form-control-sm basic_counts" type="text">
+            <span class="unit">kg</span><span>内，</span>
+            <input class="form-control form-control-sm basic_charges" type="text">
+            <span>元，每增加</span>
+            <input class="form-control form-control-sm extra_counts" type="text">
+            <span class="unit">kg</span><span>，增加运费</span>
+            <input class="form-control form-control-sm extra_charges" type="text">
+            <span>元</span>
+        </div>
+    </div>
+</script>
+
+<!-- 城市选择 -->
+<script type="text/template" id="tpl">
+    <% if( items ){ %>
+    <% _.each(items,function(item){ %>
+    <tr class="template-tr" data-arr="<%= encodeURIComponent(JSON.stringify(item.areas)) %>">
+        <td class="cell-40">
+            <div class="left">
+                    <% if( batchType && batchType == 1 ){ %>
+                    <input type="checkbox" class="check-item check-show">
+                    <% }else{ %>
+                    <input type="checkbox" class="check-item">
+                    <% } %>
+                    <div class="areas-contain">
+                    <% _.each(item.areas,function(area){ %>
+                        <span><%= area.name %>、</span>
+                    <% }) %>
+                    </div>
+            </div>
+            <div class="right">
+                <a class="j-city-choose" href="javascript:;">编辑</a>
+            </div>
+        </td>
+        <td>
+            <div class="field item">
+                <% if( status == 0 ){ %>
+                <input type="text" class="form-control form-control-sm basic_count" value="<%= item.basic_count %>" required="required" name="数据" pattern="numeric">
+                <% }else{ %>
+                <input type="text" class="form-control form-control-sm basic_count" value="<%= (item.basic_count) %>" required="required" name="数据" pattern="decimalOne">
+                <% } %>
+            </div>
+        </td>
+        <td>
+            <div class="field item">
+                <input type="text" class="form-control form-control-sm basic_charge" value="<%= (item.basic_charge / 100).toFixed(2) %>" required="required" name="数据" pattern="decimal">
+            </div>
+        </td>
+        <td>
+            <div class="field item">
+                <% if( status == 0 ){ %>
+                <input type="text" class="form-control form-control-sm extra_count" value="<%= (item.extra_count) %>" required="required" name="数据" pattern="numeric">
+                <% }else{ %>
+                <input type="text" class="form-control form-control-sm extra_count" value="<%= (item.extra_count) %>" required="required" name="数据" pattern="decimalOne">
+                <% } %>
+            </div>
+        </td>
+        <td>
+            <div class="field item">
+                <input type="text" class="form-control form-control-sm extra_charge" value="<%= (item.extra_charge / 100).toFixed(2) %>" required="required" name="数据" pattern="decimal">
+            </div>
+        </td>
+        <td><a class="j-del" href="javascript:;">删除</a></td>
+    </tr>
+    <% }); %>
+    <% }else{ %>
+    <tr class="template-tr">
+        <td class="cell-40">
+            <div class="left">
+                <% if( batchType && batchType == 1 ){ %>
+                <input type="checkbox" class="check-item check-show">
+                <% }else{ %>
+                <input type="checkbox" class="check-item">
+                <% } %>
+                <div class="areas-contain">未添加地区</div>
+            </div>
+            <div class="right">
+                <a class="j-city-choose" href="javascript:;">编辑</a>
+            </div>
+        </td>
+        <td>
+            <div class="field item">
+                <% if( status == 0 ){ %>
+                <input type="text" class="form-control form-control-sm basic_count" required="required" pattern="numeric" name="数据">
+                <% }else{ %>
+                <input type="text" class="form-control form-control-sm basic_count" required="required" pattern="decimalOne" name="数据">
+                <% } %>
+            </div>
+        </td>
+        <td>
+            <div class="field item">
+                <input type="text" class="form-control form-control-sm basic_charge" required="required" pattern="decimal" name="数据">
+            </div>
+        </td>
+        <td>
+            <div class="field item">
+                <% if( status == 0 ){ %>
+                <input type="text" class="form-control form-control-sm extra_count" required="required" pattern="numeric" name="数据">
+                <% }else{ %>
+                <input type="text" class="form-control form-control-sm extra_count" required="required" pattern="decimalOne" name="数据">
+                <% } %>
+            </div>
+        </td>
+        <td>
+            <div class="field item">
+                <input type="text" class="form-control form-control-sm extra_charge" required="required" pattern="decimal" name="数据">
+            </div>
+        </td>
+        <td><a class="j-del" href="javascript:;">删除</a></td>
+    </tr>
+    <% } %>
+</script>
+
+<!-- 城市 -->
+<script type="text/template" id="tpl1">
+    <% _.each(data, function (item) { %>
+    <div class="area clearfix">
+        <div class="area-name left">
+                <input type="checkbox" name="checkbox" class="check-areas-all" data-name="<%= item.area_name %>">
+                <span><%= item.area_name %></span>
+        </div>
+        <div class="left">
+            <% _.each(item.provinces, function (n) { %>
+            <div class="area-item">
+                    <input type="checkbox" name="checkbox" class="check-city-all" data-name="<%= n.province_name %>" data-id="<%= n.province_id %>" data-city_length="<%= n.cities.length %>">
+                    <span class="cityMain"><%=n.province_name %></span>
+                    <span class="city-length"></span>
+                <div class="city-item">
+                 <% _.each(n.cities, function (m) { %>
+                      <div class="city">
+                              <input type="checkbox" name="checkbox" class="check-city" data-name="<%= m.city_name %>" data-id="<%= m.city_id %>">
+                              <span><%= m.city_name %></span>
+                      </div>
+                    <% }); %>
+                    <button type="button" class="j-city-close"><span aria-hidden="true">&times;</span></button>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+    <% }); %>
+</script>
+
+<!-- 渲染地区 -->
+<script type="text/template" id="template-contain">
+    <% if( items.length > 0 ){ %>
+        <% _.each(items,function(item,index){ %>
+            <span><%= item.name %>、</span>
+        <% }) %>
+    <% }else{ %>
+    <span>未添加地区</span>
+    <% } %>
+</script>
+
+</html>
+
+
+
+

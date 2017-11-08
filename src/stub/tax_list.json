@@ -1,0 +1,25 @@
+{
+  "code": 10000,
+  "msg": "请求处理成功",
+  "data": {
+    "data": [
+      {
+        "id": 2,
+        "tax_template_name": "测试测试测试",
+        "threshold": 12.0,
+        "rate": 5.45,
+        "hs_code": "4353452363",
+        "postal_number": "876465534244"
+      },
+      {
+        "id": 6,
+        "tax_template_name": "sdfsdf",
+        "threshold": 0.0,
+        "rate": 11.44,
+        "hs_code": "adasd",
+        "postal_number": "asdadasd"
+      }
+    ],
+    "total_count": 2
+  }
+}

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>订单详情</title>
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+
+    <!--rev-hash -->
+    <link href="../style/css/order.css" rel="stylesheet" type="text/css">
+    <!--end -->
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div id="orderDetail"></div>
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div id="orderList"></div>
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="fr">
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div id="orderLogistic"></div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        @@include('common/footer.html')
+
+    </div>
+</div>
+
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+<!-- 复制插件 -->
+<script src="../src/plugin/zeroClipboard/ZeroClipboard.min.js"></script>
+
+ <!--rev-hash -->
+<script src="../src/fn/order-detail.js"></script>
+ <!--end -->
+
+
+<script type="text/template" id="j-template">
+    <div id="wizard" class="form_wizard wizard_horizontal">
+        <ul class="wizard_steps">
+            <li>
+                <a href="javascript:;" class="<%if(items.order_time){%><%='done'%><%}else{%><%='disabled'%><%}%>">
+                    <span class="step_no">1</span>
+                    <span class="step_descr">买家下单<br/>
+                        <small><%= items.order_time %></small>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" class="<%if(items.pay_time){%><%='done'%><%}else{%><%='disabled'%><%}%>">
+                    <span class="step_no">2</span>
+                    <span class="step_descr">买家付款<br/>
+                        <small><%= items.pay_time || items.order_time + '以后' %></small>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" class="<%if(items.delivery_time){%><%='done'%><%}else{%><%='disabled'%><%}%>">
+                    <span class="step_no">3</span>
+                    <span class="step_descr">商家发货<br/>
+                        <small><%= items.delivery_time || items.pay_time + '以后' %></small>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" class="<%if(items.delivery_time){%><%='done'%><%}else{%><%='disabled'%><%}%>">
+                    <span class="step_no">4</span>
+                    <span class="step_descr">结算货款<br/>
+                        <small><%= items.delivery_time || items.pay_time + '以后' %></small>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="order">
+        <div class="form-group">
+            <label class="ui-label ui-label-md tr">订单编号：</label>
+            <span><%= items.order_sn %></span>
+        </div>
+        <div class="form-group">
+            <label class="ui-label ui-label-md tr">付款方式：</label>
+            <span><%= payment[items.payment_id] %></span>
+        </div>
+        <div class="form-group">
+            <label class="ui-label ui-label-md tr">买家：</label>
+            <!-- <span>
+                <%= items.order_items[0].user_name %>
+                <a target="_blank" href="../../html/cross_border/identity_v.html?user_id=<%=items.user_id%>" class="ml10 green">查看实名认证信息</a>
+            </span> -->
+        </div>
+        <div class="form-group">
+            <label class="ui-label ui-label-md tr">实名信息：</label>
+            <span><%= items.order_items[0].user_name %> <%= items.order_consignee_d_t_o.id_card_no %></span>
+        </div>
+        <div class="form-group">
+            <label class="ui-label ui-label-md tr">发货仓库：</label>
+            <span class="warehouse"><%= orderStatus[items.order_status] %></span>
+            <span>
+                <a href="javascript:;" class="ml10 green btn btn-success btn-sm warehouse-change">修改</a>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="ui-label ui-label-md tr">供应商名称</label>
+            <span><%= orderStatus[items.order_status] %></span>
+        </div>
+        <div class="form-group">
+            <label class="ui-label ui-label-md tr">渠道商：</label>
+            <span><%= orderStatus[items.order_status] %></span>
+        </div>
+        <div class="form-group">
+            <label class="ui-label ui-label-md tr">收货信息：</label>
+            <span>
+                <%=items.order_consignee_d_t_o.province%>
+                <%=items.order_consignee_d_t_o.city%>
+                <%=items.order_consignee_d_t_o.area%>
+                <%=items.order_consignee_d_t_o.address%>
+                &nbsp;&nbsp;&nbsp;<%=items.order_consignee_d_t_o.consignee%>
+                &nbsp;&nbsp;&nbsp;<%=items.order_consignee_d_t_o.mobile%>
+            </span>
+            <a data-clipboard-text="<%=items.order_consignee_d_t_o.province%> <%=items.order_consignee_d_t_o.city%> <%=items.order_consignee_d_t_o.area%> <%=items.order_consignee_d_t_o.town%> <%=items.order_consignee_d_t_o.address%> &nbsp;&nbsp;&nbsp;<%=items.order_consignee_d_t_o.consignee%> &nbsp;&nbsp;&nbsp;<%=items.order_consignee_d_t_o.mobile%>" href="javascript:;" class="btn btn-success btn-sm copy-btn ml10">复制地址</a>
+            <a data-clipboard-text="<%=items.order_consignee_d_t_o.province%> <%=items.order_consignee_d_t_o.city%> <%=items.order_consignee_d_t_o.area%> <%=items.order_consignee_d_t_o.town%> <%=items.order_consignee_d_t_o.address%> &nbsp;&nbsp;&nbsp;<%=items.order_consignee_d_t_o.consignee%> &nbsp;&nbsp;&nbsp;<%=items.order_consignee_d_t_o.mobile%>" href="javascript:;" class="btn btn-success btn-sm copy-btn ml10">修改地址</a>
+        </div>
+        <div class="form-group">
+            <label class="ui-label ui-label-md tr">买家留言：</label>
+            <span><%= items.user_memo || '暂无留言' %></span>
+        </div>
+    </div>
+</script>
+
+<!-- 物流信息 -->
+<script type="text/template" id="j-template-logistic">
+    <% if( items && items.length > 0 ){ %>
+    <ul class="nav nav-tabs bar_tabs" role="tablist">
+        <% _.each(items,function(item,index){ %>
+            <% if( index == 0 ){ %>
+            <li role="presentation" class="active">
+                <a href="#logistic-<%= index + 1 %>" role="tab" data-toggle="tab" aria-expanded="false" aria-controls="全部">包裹&nbsp;-&nbsp;<%= index + 1 %></a>
+            </li>
+            <% }else{ %>
+            <li role="presentation">
+                <a href="#logistic-<%= index + 1 %>" role="tab" data-toggle="tab" aria-expanded="false">包裹&nbsp;-&nbsp;<%= index + 1 %></a>
+            </li>
+            <% } %>
+        <% }) %>
+    </ul>
+    <% _.each(items,function(item,index){ %>
+        <div class="tab-pane fade <% if( index == 0 ){ %> in active <%} %>" id="logistic-<%= index + 1 %>" role="tabpanel">
+            <div class="parcel-info">
+                <div class="box-block clearfix">
+                    <p>订单状态：商家已发货，等待买家确认收货</p>
+                    <p>
+                        <% if( '部分商品发货' ){ %>
+                        <a class="green ml10 warn-partdeliver" href="javascript:;">
+                            有部分商品未发货，订单整体处于未发货状态
+                            <span>
+                                <i class="fa fa-close green partdeliver"></i>
+                            </span>
+                        </a>
+                        <!--  } else if ('买家已下单，等待买家付款'){  -->
+                            <p class="ml10 warn-partdeliver" href="javascript:;">
+                                剩余时间：<span>30:00:00</span> 订单超时后，将自动取消
+                            </p>
+                            <p>
+                                <a class="j-order-cancel btn btn-sm btn-success" data-order_id="<%= item.id %>" data-user_id="<%= item.user_id %>" data-refund_mark="<%= item.refund_mark %>" data-orderinfo="<%= encodeURIComponent(JSON.stringify(item)) %>">取消订单</a>
+                            </p>
+                        <!--  else if ('买家已付款，等待商家发货') {  -->
+                            <p>
+                                <a class="j-send-goods btn btn-sm btn-success" data-order_id="<%= item.id %>" data-user_id="<%= item.user_id %>" data-refund_mark="<%= item.refund_mark %>" data-orderinfo="<%= encodeURIComponent(JSON.stringify(item)) %>">发货</a>
+                            </p>
+                        <% } %>
+                    </p>
+                </div>
+                <% _.each(item.order_item_list,function(o,i){ %>
+                <p>商品名称：<%= o.item_name %> <%= o.item_sku_desc %> * <%= o.number %></p>
+                <% }) %>
+                <% if( item.express_no != undefined ){ %>
+                <p>发货方式：快递</p>
+                <% } %>
+                <% if(item.express != undefined) { %>
+                <p>物流公司：<%= item.express %></p>
+                <% } %>
+                <% if(item.express_no != undefined){ %>
+                <p>物流单号：<%= item.express_no%></p>
+                <% } %>
+                <% if(item.editable == 0){ %>
+                <button class="btn btn-sm btn-success j-change-logistic" data-value="<%= item.id %>">修改物流信息</button>
+                <% } %>
+            </div>
+            <% if( item.thirdparty_list == undefined || item.thirdparty_list.length < 1 ){ %>
+                <span class="mt10 inl-bl">暂无物流跟踪信息！</span>
+            <% }else{ %>
+                <% _.each(item.thirdparty_list,function(o,i){ %>
+                    <div class="thirdparty-list">
+                        <span class="cycle"></span>
+                        <div class="logistic-content">
+                            <p class="border-line logistic-time"><%= o.time %></p>
+                            <p class="logistic-detail"><%= o.context %></p>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+    <% }) %>
+    <% }else{ %>
+    <p class="tc">该物流公司暂未返回跟踪信息，你可以前往 <a href="http://www.kuaidi100.com/" class="blue" target="_blank">快递网站查询</a> 或联系其公司电话</p>
+    <% } %>
+</script>
+
+<!-- 订单列表 -->
+<script type="text/template" id="j-template-order">
+    <table class="table table-bordered">
+        <thead class="order-header">
+        <tr>
+            <th class="tc"><span>商品</span></th>
+            <th class="tc"><span>单价(元)</span></th>
+            <th class="tc"><span>数量</span></th>
+            <th class="tc">税费（元）</th>
+            <th class="tc"><span>小计(元)</span></th>
+            <th class="tc">发货状态</th>
+            <th class="tc">维权</th>
+            <th class="tc">身份</th>
+            <th class="tc">佣金金额（元）</th>
+            <th class="tc">结算状态</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% _.each(item.order_items,function(o,i){ %>
+        <% if( o.item_type != 11 ){ %>
+        <tr>
+            <td class="cell-20">
+                <dl>
+                    <dt><img class="order-image" src="<%= o.item_image_url %>"></dt>
+                    <dd>
+                        <p><%= o.item_name %></p>
+                        <p class="sku"><%= o.item_sku_desc %></p>
+                    </dd>
+                </dl>
+            </td>
+            <td class="cell-10 tc"><span><%= o.unit_price_str %></span></td>
+            <td class="cell-10 tc"><span><%= o.number %></span></td>
+            <td class="cell-10 tc" >
+                <span><%= (item.tax_fee/100).toFixed(2) || 0 %></span>
+            </td>
+            <td class="cell-10 tc"><span><%= ((o.unit_price * o.number)/100).toFixed(2) %></span></td>
+            <td class="cell-10 tc">
+                <% if( o.refund_status == 1 || o.refund_status == 2 ){ %>
+                    维权中
+                <% }else if( o.refund_status == 4 ){ %>
+                <span>退款完成</span>
+                <% }else if( o.refund_status == 3 && o.delivery_mark == 0 ){ %>
+                <span>未发货</span>
+                <% }else if( o.refund_status == 3 && o.delivery_mark == 1 ){ %>
+                <span>已发货</span>
+                <% }else if( o.refund_status == undefined && o.delivery_mark == 0 ){ %>
+                <span>未发货</span>
+                <% }else if( o.refund_status == undefined && o.delivery_mark == 1 ){ %>
+                <span>已发货</span>
+                <% } %>
+            </td>
+            <td class="cell-10 tc">
+                <% if( o.refund_status == 1 || o.refund_status == 2 ){ %>
+                <a href="./order-refund.html?order_id=<%=o.order_id%>&user_id=<%=o.user_id%>&order_item_id=<%= o.original_order_item_id ==undefined ? o.id : o.original_order_item_id%>" class="ui-button ui-button-sblue green">处理维权</a>
+                <% }else{ %>
+                    －
+                <% } %>
+            </td>
+            <td class="cell-10 tc">
+                <% if( i == 0 ){ %>
+                    <span><%= (item.discount_amount/100).toFixed(2) %></span>
+                <% } else{%>
+                    -
+                <% } %>
+            </td>
+            <td class="cell-10 tc">
+                <p>分享汇</p>
+                <p>渠道</p>
+                <p>店主</p>
+                <p>分享合伙人</p>
+            </td>
+            <td class="cell-10 tc">
+                <p>10.00</p>
+                <p>10.00</p>
+                <p>10.00</p>
+                <p>10.00</p>
+            </td>
+            <td class="cell-10 tc">
+                已结算
+            </td>
+        </tr>
+        <% } %>
+
+        <% }) %>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="17" class="tr">实付金额：<%= item.total_amount %>&nbsp;元</td>
+            </tr>
+        </tfoot>
+    </table>
+</script>
+
+<!-- 发货 -->
+<script type="text/template" id="j-template-send-goods">
+    <table class="table table-bordered">
+        <thead class="order-header">
+        <tr>
+            <th class="tc cell-10"> <input type="checkbox" id="check-all" class="flat"></th>
+            <th class="tc cell-50"><span>商品</span></th>
+            <th class="tc cell-10"><span>数量</span></th>
+            <th class="tc cell-10"><span>物流公司</span></th>
+            <th class="tc cell-20"><span>快递单号</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% _.each(item.order_items,function(o,i){ %>
+        <% if( o.item_type != 11 ){ %>
+        <tr>
+            <td class="tc">
+                <% if( o.delivery_mark != 1 ){ %>
+                <input type="checkbox" class="checkbox flat" data-mark="<%= o.delivery_mark || 0 %>" data-id="<%= o.id %>">
+                <% }else{ %>
+                <span>已发货</span>
+                <% } %>
+            </td>
+            <td>
+                <dl>
+                    <dt><img style="width:60px;height: 60px;" src="<%= o.item_image_url %>"></dt>
+                    <dd>
+                        <p><%= o.item_name %></p>
+                        <p class="sku"><%= o.item_sku_desc %></p>
+                    </dd>
+                </dl>
+            </td>
+            <td class="tc"><span><%= o.number %></span></td>
+            <td class="tc"><span>-</span></td>
+            <td class="tc"><span>-</span></td>
+        </tr>
+        <% } %>
+        <% }) %>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5">
+                <div class="form-group">
+                    <label class="ui-label ui-label-md">收货地址：</label>
+                    <span><%= item.order_consignee_d_t_o.province %><%= item.order_consignee_d_t_o.city %><%= item.order_consignee_d_t_o.area %><%= item.order_consignee_d_t_o.address %></span>
+                </div>
+                <div class="form-group">
+                    <label class="ui-label ui-label-md">发货方式：</label>
+                    <label><input type="radio" name="logistics" class="flat" checked="checked" data-value="1">&nbsp;需要物流</label>
+                    <label><input type="radio" name="logistics" class="flat" data-value="0">&nbsp;无需物流</label>
+                </div>
+                <div class="form-group logistics-info">
+                    <label class="ui-label ui-label-md">物流公司：</label>
+                    <select class="form-control form-control-lg" id="logisticsList">
+                        <option value="">请选择物流公司</option>
+                    </select>
+                </div>
+                <div class="form-group logistics-info">
+                    <label class="ui-label ui-label-md">物流单号：</label>
+                    <input class="form-control form-control-lg" id="logisticCode">
+                </div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</script>
+
+<!-- 修改仓库 -->
+<script type = "text/template" id = "j-template-warehouse-change">
+    <div class="form-group mb10 left">
+        <input type="checkbox" id="check-all" class="flat">
+        <label class="ui-label ui-label-md tr">只显示开放仓库</label>
+    </div>
+    <div class="form-group right">
+        <input class="form-control form-control-lg" id="consignee_mobile" placeholder="请输入仓库ID或名称">
+        <button type="button" class="btn btn-sm btn-success ml10 mb10" id="j-search">搜索</button>
+    </div>
+    <table class="table table-bordered">
+        <thead class="order-header">
+            <tr>
+                <th class="tc cell-5">
+                </th>
+                <th class="tc cell-10">
+                    <span>仓库ID</span>
+                </th>
+                <th class="tc cell-10">
+                    <span>简称</span>
+                </th>
+                <th class="tc cell-10">
+                    <span>全称</span>
+                </th>
+                <th class="tc cell-10">
+                    <span>地址</span>
+                </th>
+                <th class="tc cell-10">
+                    <span>状态</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% _.each(item,function(o,i){ %>
+            <tr>
+                <td class="tc">
+                    <input type="radio" class="radio flat" data-mark="" data-id="" name="warename">
+                </td>
+                <td>123</td>
+                <td class="tc"><span>建成</span></td>
+                <td class="tc"><span>全称</span></td>
+                <td class="tc"><span>地址</span></td>
+                <td class="tc"><span>开放／关闭</span></td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+    <!-- 页码 -->
+    <div class="widget-list clearfix ">
+        <div class="form-group left">
+            <button type="button" class="btn btn-lg btn-success ml10 mb10" id="j-change-warehouse">确定</button>
+        </div>
+        <div class="list-page pull-right">
+            <span class="pagination-info"></span>
+            <div class="ui-pagination pagination-pop-warehouse"></div>
+        </div>
+    </div>
+    <!-- /页码 -->
+</script>
+
+<!-- 修改物流信息 -->
+<script type="text/template" id="j-template-change-logistics">
+    <table class="table table-bordered">
+        <thead class="order-header">
+        <tr>
+            <th class="tc cell-50"><span>商品</span></th>
+            <th class="tc cell-10"><span>数量</span></th>
+            <th class="tc cell-10"><span>物流公司</span></th>
+            <th class="tc cell-20"><span>快递单号</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% _.each(item.order_item_list,function(o,i){ %>
+        <% if( o.item_type != 11 ){ %>
+        <tr data-id="<%= o.delivery_info_id %>" class="logistics_items">
+            <td>
+                <dl>
+                    <dt><img style="width:60px;height: 60px;" src="<%= o.item_image_url %>"></dt>
+                    <dd>
+                        <p><%= o.item_name %></p>
+                        <p class="sku"><%= o.item_sku_desc %></p>
+                    </dd>
+                </dl>
+            </td>
+            <td class="tc"><span><%= o.number %></span></td>
+            <td class="tc"><span>-</span></td>
+            <td class="tc"><span>-</span></td>
+        </tr>
+        <% } %>
+        <% }) %>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5">
+                <div class="form-group">
+                    <label class="ui-label ui-label-md">收货地址：</label>
+                    <span><%= item.order_consignee_d_t_o.province %><%= item.order_consignee_d_t_o.city %><%= item.order_consignee_d_t_o.area %><%= item.order_consignee_d_t_o.address %></span>
+                </div>
+                <div class="form-group">
+                    <label class="ui-label ui-label-md">发货方式：</label>
+                    <label><input type="radio" name="logistics" class="flat" checked="checked" data-value="1" style="width:auto">&nbsp;需要物流</label>
+                </div>
+                <div class="form-group logistics-info">
+                    <label class="ui-label ui-label-md">物流公司：</label>
+                    <select class="form-control form-control-lg" id="changelogisticsList">
+                        <option value="">请选择物流公司</option>
+                    </select>
+                </div>
+                <div class="form-group logistics-info">
+                    <label class="ui-label ui-label-md">物流单号：</label>
+                    <input class="form-control form-control-lg" id="changelogisticCode">
+                </div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</script>
+
+<!-- 物流公司 -->
+<script type="text/template" id="j-template-logistics">
+    <option>请选择物流公司</option>
+    <% _.each(items,function(item,index){ %>
+    <option value="<%= item.code %>"><%= item.name %></option>
+    <% }) %>
+</script>
+</body>
+</html>

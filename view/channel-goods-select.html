@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- rev-hash -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- end -->
+    <!-- rev-hash -->
+    <link href="../style/css/channel.css" rel="stylesheet" type="text/css">
+    <!-- end -->
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        @@include('common/sidebar.html')
+        @@include('common/header.html')
+        @@include('../src/plugin/select-plugin/select-plugin.html')
+    </div>
+    <!-- page content -->
+
+    <!-- 内容部分 -->
+    <div class="right_col" role="main">
+        <!-- 搜索框 -->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>搜索框</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="form-inline fr">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" placeholder="请输入商品名称" class="form-control form-control-lg" id="keywords">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-success" id="search">搜索</button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /搜索框 -->
+
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><small>渠道关联商品</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="fr">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content editorContent">
+                <!-- 关联-->
+                <div class="form-inline">
+                    <div class="form-group channel-name-list">
+                        <label class="ui-label ui-label-sm tl">渠道商：</label>
+                        <div class="channel-name-lists mt10">
+
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group mb10">
+                        <label class="ui-label ui-label-sm tl">关联范围：</label>
+                        <div class="inl-bl" id="channel">
+                            <label class="ui-label ui-label-sm">
+                                全部
+                                <input type="radio" class="flat" name="radio" value="1" checked="checked"/>
+                            </label>
+
+                            <label class="ui-label ui-label-sm">
+                                品牌
+                                <input type="radio" class="flat" name="radio" value="2" />
+                            </label>
+
+                            <label class="ui-label ui-label-sm">
+                                类目
+                                <input type="radio" class="flat" name="radio" value="3" />
+                            </label>
+
+                            <label class="ui-label ui-label-sm">
+                                商品
+                                <input type="radio" class="flat" name="radio" value="4"/>
+                            </label>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group mb10" id="channelButton">
+                        <a class="btn btn-sm btn-success" href="javascript:;" id="selectAll" data-value="1">关联全部</a>
+                        <a class="btn btn-sm btn-success dpnone" href="javascript:;" id="selectPluginBrand" data-value="2">关联品牌</a>
+                        <a class="btn btn-sm btn-success dpnone" href="javascript:;" id="selectPluginCategory" data-value="3">关联类目</a>
+                        <a class="btn btn-sm btn-success dpnone" href="javascript:;" id="selectPluginGoods" data-value="4">关联商品</a>
+                    </div>
+                </div>
+                <div class="channel-goods-list dpnone">
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-striped jambo_table bulk_action table-bordered">
+                            <thead>
+                            <tr class="headings">
+                                <th class="column-title tc">
+                                    <input type="checkbox" id="check-all" class="flat">
+                                </th>
+                                <th class="column-title tc">商品名称</th>
+                                <th class="column-title tc">分享汇成本价(元)</th>
+                                <th class="column-title tc">最低售价(元)</th>
+                                <th class="column-title tc">建议零售价(元)</th>
+                                <th class="column-title tc">结算价(元)</th>
+                                <th class="column-title tc">状态</th>
+                                <th class="column-title tc">操作</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="goodsList">
+                            <tr>
+                                <td colspan="18" class="tc">没有关联任何商品哦~</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 页码 -->
+                    <div class="widget-list">
+                        <div class="fl pagination">
+                            <button class="btn btn-sm btn-success" id="batchDelete">批量取消关联</button>
+                        </div>
+                        <div class="list-page fr">
+                            <span class="pagination-info"></span>
+                            <div class="ui-pagination pagination"></div>
+                        </div>
+                    </div>
+                    <!-- /页码 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- page content -->
+    @@include('common/footer.html')
+</div>
+</body>
+<!-- rev-hash -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- end -->
+
+
+<!-- rev-hash -->
+<script src="../src/fn/channel-goods-select.js"></script>
+<!-- end -->
+
+<!-- 关联后的商品展示 -->
+<script type="text/template" id="j-template-goods">
+    <% if( items.length > 0 ){ %>
+    <% _.each(items,function(item, index){ %>
+    <tr class="list">
+        <th class="column-title tc">
+            <input type="checkbox" class="flat checkbox" data-id="<%= item.id %>">
+        </th>
+        <td><span class="goods-name"><%= item.item_name %></span></td>
+        <td class="tc"><%= item.fxh_code ? (item.fxh_cost/100).toFixed(2) : '-' %></td>
+        <td class="tc"><%= item.promotion_price ? (item.promotion_price/100).toFixed(2) : '-' %></td>
+        <td class="tc"><%= item.market_price ? (item.market_price/100).toFixed(2) : '-' %></td>
+        <td class="tc"><%= item.settlement_price ? (item.settlement_price/100).toFixed(2) : '-' %></td>
+        <td class="tc"><%= ['-','正常','冻结'][item.freeze] %></td>
+        <td class="tc">
+            <a href="javascript:;" class="j-edit-price" data-id="<%= item.id %>" data-name="<%= item.item_name %>">编辑结算价</a>
+            <span>-</span>
+            <a href="javascript:;" class="j-channel-delete" data-id="<%= item.id %>" data-name="<%= item.item_name %>">取消关联</a>
+        </td>
+    </tr>
+    <% }) %>
+    <% }else{ %>
+    <tr>
+        <td colspan="18" class="tc">没有关联任何商品哦~</td>
+    </tr>
+    <% } %>
+</script>
+
+<!-- 商品成本价 -->
+<script type="text/template" id="j-template-sku">
+    <div class="table-responsive" id="skuList">
+    </div>
+</script>
+
+<!-- 商品成本价 - table -->
+<script type="text/template" id="j-template-sku-table">
+    <table class="table table-bordered">
+        <thead>
+        <tr class="headings">
+            <th class="column-title tc cell-30">商品名称</th>
+            <th class="column-title tc cell-50" colspan="<%= 2*(items[0].sku_property_d_t_o_list.length) %>">规格</th>
+            <th class="column-title tc cell-20">结算价</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% _.each(items,function(item,index){ %>
+        <% if( index == 0 ){ %>
+        <tr>
+            <td class="tc" rowspan="<%= items.length %>"><%= item.item_name %></td>
+            <% _.each(item.sku_property_d_t_o_list,function(n,i){ %>
+            <td rowspan="<%= items.length %>" class="tc">
+                <span><%= n.name || '-' %></span>
+            </td>
+            <td class="tc">
+                <span><%= n.value || '-' %></span>
+            </td>
+            <td class="tc">
+                <input class="form-control form-control-md settlement-sku-input" data-item_id="<%= item.biz_item_id %>" data-sku_id="<%= item.id || '0' %>" value="<%= item.settlement_price ? (item.settlement_price/100).toFixed(2) : '' %>">
+            </td>
+            <% }) %>
+        </tr>
+        <% }else{ %>
+        <tr>
+            <% _.each(item.sku_property_d_t_o_list,function(n,i){ %>
+            <td class="tc">
+                <span><%= n.value || '-' %></span>
+            </td>
+            <td class="tc">
+                <input class="form-control form-control-md settlement-sku-input"  data-item_id="<%= item.biz_item_id %>" data-sku_id="<%= item.id || '0' %>" value="<%= item.settlement_price ? (item.settlement_price/100).toFixed(2) : '' %>">
+            </td>
+            <% }) %>
+        </tr>
+        <% } %>
+        <% }) %>
+        </tbody>
+    </table>
+</script>
+
+<script type="text/template" id="j-template-channel-list">
+    <% _.each(items, function(item,index){ %>
+        <div class="channel-detail">
+            <img class="channel-img" src="http://img.mockuai.com/tms/2017/3/20/upload_ed82c572beb295358c92c025eed00e1f.jpeg">
+            <span><%= item.name %></span>
+            <i class="fa fa-close img-close j-image-close" data-id="<%= item.id %>"></i>
+        </div>
+    <% }) %>
+</script>
+</html>

@@ -1,0 +1,241 @@
+{
+  "code": 10000,
+  "msg": "success",
+  "data": {
+    "item_list": [
+      {
+        "category_id": 10,
+        "item_name": "我的测试商品121383",
+        "item_brand_id": "5",
+        "country_code": "美国",
+        "delivery_type": "3",
+        "weight": "1",
+        "volume": "1",
+        "item_desc": "<p>asdasd</p>",
+        "cost_price": "300",
+        "market_price": "200",
+        "promotion_price": "100",
+        "commodity_code": "4",
+        "item_sku_dto_list": [
+          {
+            "id": 140,
+            "sku_code": "X-绿",
+            "item_id": 95,
+            "bar_code": "4",
+            "cost_price": "300",
+            "market_price": "200",
+            "promotion_price": "100",
+            "image_url": "http://img.mockuai.com/images/20170620/15/20170620152628509.png",
+            "sku_property_dto_list": [
+              {
+                "id": 355,
+                "sku_id": 140,
+                "name": "规格",
+                "value": "X",
+                "sort": 0,
+                "item_id": 95,
+                "property_value_id": 228,
+                "sku_property_tmpl_id": 1
+              },
+              {
+                "id": 356,
+                "sku_id": 140,
+                "name": "颜色",
+                "value": "绿",
+                "sort": 1,
+                "item_id": 95,
+                "property_value_id": 226,
+                "sku_property_tmpl_id": 13,
+                "has_image": 1
+              }
+            ]
+          },
+          {
+            "id": 141,
+            "sku_code": "X-红",
+            "item_id": 95,
+            "bar_code": "4",
+            "cost_price": "300",
+            "market_price": "200",
+            "promotion_price": "100",
+            "image_url": "http://img.mockuai.com/images/20170620/15/20170620152628509.png",
+            "sku_property_dto_list": [
+              {
+                "id": 357,
+                "sku_id": 141,
+                "name": "规格",
+                "value": "X",
+                "sort": 0,
+                "item_id": 95,
+                "property_value_id": 228,
+                "sku_property_tmpl_id": 1
+              },
+              {
+                "id": 358,
+                "sku_id": 141,
+                "name": "颜色",
+                "value": "红",
+                "sort": 1,
+                "item_id": 95,
+                "property_value_id": 227,
+                "sku_property_tmpl_id": 13,
+                "has_image": 1
+              }
+            ]
+          },
+          {
+            "id": 142,
+            "sku_code": "X-白",
+            "item_id": 95,
+            "bar_code": "4",
+            "cost_price": "300",
+            "market_price": "200",
+            "promotion_price": "100",
+            "image_url": "http://img.mockuai.com/images/20170620/15/20170620152628509.png",
+            "sku_property_dto_list": [
+              {
+                "id": 359,
+                "sku_id": 142,
+                "name": "规格",
+                "value": "X",
+                "sort": 0,
+                "item_id": 95,
+                "property_value_id": 228,
+                "sku_property_tmpl_id": 1
+              },
+              {
+                "id": 360,
+                "sku_id": 142,
+                "name": "颜色",
+                "value": "白",
+                "sort": 1,
+                "item_id": 95,
+                "property_value_id": 234,
+                "sku_property_tmpl_id": 13,
+                "has_image": 1
+              }
+            ]
+          }
+        ],
+        "id": "100"
+      },
+      {
+        "category_id": 10,
+        "item_name": "我的测试商品",
+        "item_brand_id": "5",
+        "country_code": "美国",
+        "delivery_type": "3",
+        "weight": "1",
+        "volume": "1",
+        "item_desc": "<p>asdasd</p>",
+        "cost_price": "300",
+        "market_price": "200",
+        "promotion_price": "100",
+        "commodity_code": "4",
+        "item_sku_dto_list": [
+          {
+            "id": 140,
+            "sku_code": "X-绿",
+            "item_id": 95,
+            "bar_code": "4",
+            "cost_price": "300",
+            "market_price": "200",
+            "promotion_price": "100",
+            "image_url": "http://img.mockuai.com/images/20170620/15/20170620152628509.png",
+            "sku_property_dto_list": [
+              {
+                "id": 355,
+                "sku_id": 140,
+                "name": "规格",
+                "value": "X",
+                "sort": 0,
+                "item_id": 95,
+                "property_value_id": 228,
+                "sku_property_tmpl_id": 1
+              },
+              {
+                "id": 356,
+                "sku_id": 140,
+                "name": "颜色",
+                "value": "绿",
+                "sort": 1,
+                "item_id": 95,
+                "property_value_id": 226,
+                "sku_property_tmpl_id": 13,
+                "has_image": 1
+              }
+            ]
+          },
+          {
+            "id": 141,
+            "sku_code": "X-红",
+            "item_id": 95,
+            "bar_code": "4",
+            "cost_price": "300",
+            "market_price": "200",
+            "promotion_price": "100",
+            "image_url": "http://img.mockuai.com/images/20170620/15/20170620152628509.png",
+            "sku_property_dto_list": [
+              {
+                "id": 357,
+                "sku_id": 141,
+                "name": "规格",
+                "value": "X",
+                "sort": 0,
+                "item_id": 95,
+                "property_value_id": 228,
+                "sku_property_tmpl_id": 1
+              },
+              {
+                "id": 358,
+                "sku_id": 141,
+                "name": "颜色",
+                "value": "红",
+                "sort": 1,
+                "item_id": 95,
+                "property_value_id": 227,
+                "sku_property_tmpl_id": 13,
+                "has_image": 1
+              }
+            ]
+          },
+          {
+            "id": 142,
+            "sku_code": "X-白",
+            "item_id": 95,
+            "bar_code": "4",
+            "cost_price": "300",
+            "market_price": "200",
+            "promotion_price": "100",
+            "image_url": "http://img.mockuai.com/images/20170620/15/20170620152628509.png",
+            "sku_property_dto_list": [
+              {
+                "id": 359,
+                "sku_id": 142,
+                "name": "规格",
+                "value": "X",
+                "sort": 0,
+                "item_id": 95,
+                "property_value_id": 228,
+                "sku_property_tmpl_id": 1
+              },
+              {
+                "id": 360,
+                "sku_id": 142,
+                "name": "颜色",
+                "value": "白",
+                "sort": 1,
+                "item_id": 95,
+                "property_value_id": 234,
+                "sku_property_tmpl_id": 13,
+                "has_image": 1
+              }
+            ]
+          }
+        ],
+        "id": "95"
+      }
+    ],
+    "total_count": 119
+  }
+}
